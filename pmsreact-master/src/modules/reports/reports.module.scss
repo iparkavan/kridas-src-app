@@ -1,0 +1,75 @@
+.ProcedureSearch {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1fr 1fr;
+	grid-gap: 15px;
+}
+
+.RightAlign {
+	text-align: right;
+}
+
+.TopMargin {
+	margin-top: 10px;
+}
+
+.AddEditLayout {
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	grid-column-gap: 15px;
+}
+
+.AddEditFormSection {
+	display: flex;
+	flex-direction: column;
+}
+
+.AddEditFormSection > div {
+	margin: 10px 0 10px 0;
+}
+
+.ThreeColumnGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 15px;
+	grid-row-gap: 5px;
+}
+
+.FourColumnGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-column-gap: 15px;
+	grid-row-gap: 5px;
+}
+
+.AddEditButtonSection {
+	display: flex;
+	flex-direction: column;
+}
+
+.AddEditButtonSection > div {
+	margin: 5px 0 5px 0;
+}
+
+.TwoColumnOverride {
+	grid-column: 1 / 3;
+}
+
+.ErrorText {
+	color: red;
+}
+
+.AddFlexContainer {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+}
+
+.AddFlexContainer > div {
+	margin: 10px;
+}
+
+.ItemSearch {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1fr 1fr;
+	grid-gap: 15px;
+}

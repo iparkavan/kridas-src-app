@@ -1,0 +1,26 @@
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 0em;
+  /* box-shadow: inset 0px 1px 8px -3px #ababab; */
+  /* background: #fffcfc; */
+  border: solid var(--chakra-colors-primary-500) 1px;
+  border-radius: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.editor::-webkit-scrollbar {
+  display: none;
+}
+
+/* .editor :global(.public-DraftEditor-content) {
+  min-height: 140px;
+} */
+
+.smallHeading {
+  font-size: 13px;
+  color: #aaaaaa;
+}

@@ -1,0 +1,14 @@
+.pnf_wrap {
+  display: -ms-grid;
+  display: grid;
+  width: calc(100% - 72px);
+  height: 100vh;
+  margin-left: 72px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=pagenotfoundpage.css.map */

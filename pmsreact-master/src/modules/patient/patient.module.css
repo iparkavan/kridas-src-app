@@ -1,0 +1,345 @@
+/* Marging */
+.RightAlign {
+  text-align: right;
+}
+
+.TopMargin {
+  margin-top: 25px;
+}
+
+.TopMargin5 {
+  margin-top: 5px;
+}
+
+.BottomMargin5 {
+  margin-bottom: 5px;
+}
+
+.RightMargin5 {
+  margin-right: 5px;
+}
+
+.LeftMargin5 {
+  margin-left: 5px;
+}
+
+.BoldText {
+  font-weight: bold;
+}
+
+.TableBackground {
+  background-color: "#f0f0f0";
+}
+
+.ReadOnlyBackground {
+  background: "#f0f0f0";
+}
+
+.PatientSearch {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.BlockBackground {
+  background-color: rgb(243, 242, 242);
+}
+
+.TwoColumnGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.TwoColumnOverride {
+  grid-column: 1 / 3;
+}
+
+.OneTwoColumnOverride {
+  grid-column: 1 / 3;
+}
+
+.ThreeTwoColumnOverride {
+  grid-column: 3 / 5;
+}
+
+.ThreeThreeColumnOverride {
+  grid-column: 3 / 6;
+}
+
+.TwoThreeColumnOverride {
+  grid-column: 2 / 5;
+}
+
+.TwoFiveColumnOverride {
+  grid-column: 2 / 7;
+}
+
+.FiveTwoColumnOverride {
+  grid-column: 5 / 7;
+}
+
+.ThreeColumnOverride {
+  grid-column: 1 / 4;
+}
+
+.FiveColumnOverride {
+  grid-column: 1 / 6;
+}
+
+.RadioAlign {
+  margin-top: 5px;
+  text-align: left;
+}
+
+.PatientAddEditBlock {
+  border-radius: 15px;
+  border: 1px;
+  border-style: solid;
+  width: 100%;
+}
+
+.PatientAddEditHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  padding: 20px;
+}
+
+.PatientInputBlock {
+  margin: 20px;
+}
+
+.ThreeColumnGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.FourColumnGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.FiveColumnGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.SevenColumnGrid {
+  display: grid;
+  grid-template-columns: 350px 80px 100px 100px 100px 130px 75px;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.NineColumnGrid {
+  display: grid;
+  grid-template-columns: 285px 65px 100px 100px 85px 140px 100px 125px 40px;
+  grid-column-gap: 20px;
+  grid-row-gap: 5px;
+}
+
+.DividerMargin {
+  margin: 15px 0 15px 0;
+}
+
+.PatientProfileBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.PatientProfileMiddleSection {
+  display: grid;
+  flex-direction: row;
+}
+
+.PatientProfileMiddleSection > div {
+  margin-bottom: 15px;
+}
+
+.PatientProfileLeftSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientProfileLeftSection > div {
+  margin-bottom: 15px;
+}
+
+.PatientProfileContactInfo {
+  display: grid;
+  grid-template-columns: 100px auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.ErrorText {
+  color: red;
+}
+
+.RedText {
+  color: red;
+}
+
+.RedBoldText {
+  color: red;
+  font-weight: bold;
+}
+
+.PatientProfileRightSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientProfileRightSection > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.PatientAddEditLayout {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 15px;
+}
+
+.PatientAddEditFormSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientAddEditFormSection > div {
+  margin: 10px 0 10px 0;
+}
+
+.PatientAddEditButtonSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientAddEditButtonSection > div {
+  margin: 5px 0 5px 0;
+}
+
+.HeadingColor {
+  color: #0779e4;
+}
+
+.ProfileSectionHeading {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.PatientNoteAddEditLayout {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 15px;
+}
+
+.PatientNoteAddEditFormSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientNoteAddEditFormSection > div {
+  margin: 10px 0 10px 0;
+}
+
+.PatientNoteAddEditButtonSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientNoteAddEditButtonSection > div {
+  margin: 5px 0 5px 0;
+}
+
+.PatientProcedureAddEditLayout {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 15px;
+}
+
+.PatientProcedureAddEditFormSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientProcedureAddEditFormSection > div {
+  margin: 10px 0 10px 0;
+}
+
+.PatientProcedureAddEditButtonSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientProcedureAddEditButtonSection > div {
+  margin: 5px 0 5px 0;
+}
+
+.PatientInvoiceAddEditLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 15px;
+}
+
+.InvoiceSummaryHeader {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.PaymentSummaryHeader {
+  display: grid;
+  grid-template-columns: 0.75fr 1fr 1.25fr 1.25fr 1fr 0.25fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.InvoicePaymentGrid {
+  display: grid;
+  grid-template-columns: 160px 130px 120px 120px 130px 160px 80px;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.PatientPaymentAddEditLayout {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 15px;
+}
+
+.PatientPaymentAddEditFormSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientPaymentAddEditFormSection > div {
+  margin: 10px 0 10px 0;
+}
+
+.PatientPaymentAddEditButtonSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientPaymentAddEditButtonSection > div {
+  margin: 5px 0 5px 0;
+}
+
+.AddPaymentSummaryFooter {
+  display: grid;
+  grid-template-columns: 150px 10px 130px 10px 130px 10px 200px 200px;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}

@@ -1,0 +1,13 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "beats-bulk-api"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-l35r4vvoht"
+s3_prefix = "beats-bulk-api"
+region = "us-east-2"
+profile = "beatsbulkdev"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "EnvTypeParameter=\"dev\""
+image_repositories = []

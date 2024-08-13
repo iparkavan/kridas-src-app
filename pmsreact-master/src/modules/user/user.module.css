@@ -1,0 +1,68 @@
+.TopMargin {
+  margin-top: 10px;
+}
+
+.UserSearch {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.RightAlign {
+  text-align: right;
+}
+
+.LeftMargin5 {
+  margin-left: 5px;
+}
+
+.ErrorText {
+  color: red;
+}
+
+.UserAddEditLayout {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 15px;
+}
+
+.UserAddEditFormSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.UserAddEditFormSection > div {
+  margin: 10px 0 10px 0;
+}
+
+.ThreeColumnGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 5px;
+}
+
+.HeadingColor {
+  color: #0779e4;
+}
+
+.TwoColumnOverride {
+  grid-column: 1 / 3;
+}
+
+.ThreeColumnOverride {
+  grid-column: 1 / 4;
+}
+
+.AddEditButtonSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.AddEditButtonSection > div {
+  margin: 5px 0 5px 0;
+}
+
+.CheckboxAlign {
+  margin-top: 25px;
+}

@@ -1,0 +1,120 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS Batch on Fargate
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+Resources:
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: beats-bulk-upload-fargate-service-role
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSBatchServiceRole
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - batch.amazonaws.com
+            Action:
+              - sts:AssumeRole
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: beats-bulk-upload-fargate-excution-role
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ecs-tasks.amazonaws.com
+            Action:
+              - sts:AssumeRole
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: beats-bulk-upload-security-grp
+      GroupDescription: beats-bulk-upload-security-group
+      VpcId: !Ref VpcId
+  ComputeEnvironment:
+    Type: AWS::Batch::ComputeEnvironment
+    Properties:
+      ComputeEnvironmentName: beats-bulk-awsbatch-fargate
+      Type: MANAGED
+      State: ENABLED
+      ServiceRole: !Sub ${ServiceRole.Arn}
+      ComputeResources:
+        Type: FARGATE
+        MaxvCpus: 256
+        Subnets: !Ref SubnetIds
+        SecurityGroupIds:
+          - !Sub ${SecurityGroup.GroupId}
+  JobQueue:                 
+    Type: AWS::Batch::JobQueue
+    Properties:
+      JobQueueName: beats-bulk-upload-queue
+      Priority: 1
+      State: ENABLED
+      ComputeEnvironmentOrder:
+        - Order: 1
+          ComputeEnvironment: !Ref ComputeEnvironment
+  JobDefinition:
+    Type: AWS::Batch::JobDefinition
+    Properties:
+      JobDefinitionName: beats-bulk-upload-job
+      Type: container
+      PlatformCapabilities:
+        - FARGATE
+      ContainerProperties:
+        Image: 519922284892.dkr.ecr.us-east-2.amazonaws.com/beats-bulk-upload-job:latest
+        ExecutionRoleArn: !Sub ${ExecutionRole.Arn}
+        ResourceRequirements:
+          - Type: VCPU
+            Value: 0.5
+          - Type: MEMORY
+            Value: 1024
+        NetworkConfiguration:
+          AssignPublicIp: ENABLED
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            "awslogs-group": !Ref LogGroup
+            "awslogs-stream-prefix": "prefix"
+  JobSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VpcId
+      GroupDescription: 'Security Group for Batch job'
+  JobRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'ecs-tasks.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      # Policy for the Job to access resources on AWS.
+      Policies:
+      - PolicyName: fargate-bucketAccess
+        PolicyDocument:
+          Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action: [ 's3:GetObject', 's3:PutObject' ]
+              Resource: ["arn:aws:s3:::beats-bulk-storage-dev","arn:aws:s3:::beats-bulk-storage-dev/*"]
+                
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: "beats-bulk-upload-job/log"
+      RetentionInDays: 14  

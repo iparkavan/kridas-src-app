@@ -1,0 +1,309 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  beats-bulk-signin
+
+  Sample SAM Template for beats-bulk-signin
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    Environment:
+      Variables:
+        region: '{{resolve:ssm:region:1}}' 
+        UserPoolId: '{{resolve:ssm:UserPoolId:1}}'
+        ClientIdWithSecret: '{{resolve:ssm:ClientIdWithSecret:1}}'
+        ClientIdWithSecretSecret: '{{resolve:ssm:ClientIdWithSecretSecret:1}}'
+        ClientId: '{{resolve:ssm:ClientId:1}}'
+        DefaultPass: '{{resolve:ssm:DefaultPass:1}}'
+        RDS_HOSTNAME: '{{resolve:ssm:RDS_HOSTNAME:1}}'
+        RDS_USERNAME: '{{resolve:ssm:RDS_USERNAME:1}}'
+        RDS_PASSWORD: '{{resolve:ssm:RDS_PASSWORD:1}}'
+        RDS_PORT: '{{resolve:ssm:RDS_PORT:1}}'
+        RDS_DATABASE: '{{resolve:ssm:RDS_DATABASE:1}}'
+        accessKeyId: '{{resolve:ssm:accessKeyId:1}}'
+        secretAccessKey: '{{resolve:ssm:secretAccessKey:1}}'
+  Api:
+    Cors:
+      AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,is-update,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+      AllowOrigin: "'*'"
+      
+Resources:
+  BeatsUserUpdateApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: UserUpdateApi
+      StageName: UserUpdate
+      OpenApiVersion: "2.0"
+      Auth:
+        Authorizers:
+          BeatsUserAuthorizer:
+            UserPoolArn: '{{resolve:ssm:UserPoolArn:1}}'
+            Identity:
+              Header: Authorization
+  GatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsUserUpdateApi
+  UpdateUserFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.updateUser
+      Runtime: nodejs14.x
+      Timeout: 45
+      Events:
+        UpdateUser:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsUserUpdateApi
+            Path: /UpdateUser
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  BeatsUserSignInApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: UserSignInApi
+      StageName: UserSignIn
+      OpenApiVersion: "2.0"
+  SigninGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsUserSignInApi
+  BeatsUserRefreshTokenApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: UserRefreshTokenApi
+      StageName: UserRefreshToken
+      OpenApiVersion: "2.0"
+  BeatsUserRefreshTokenGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsUserRefreshTokenApi
+  SignInFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.signIn
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        SignIn:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsUserSignInApi
+            Path: /SignIn
+            Method: post
+  
+  RefreshTokenFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.refreshToken
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        RefreshTokenApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsUserRefreshTokenApi
+            Path: /RefreshToken
+            Method: post                
+  BeatsForgotPasswordApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: ForgotPasswordApi
+      StageName: ForgotPassword
+      OpenApiVersion: "2.0"  
+  ForgotPasswordGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsForgotPasswordApi
+  ForgotPasswordFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.forgotPassword
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        ForgotPassword:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsForgotPasswordApi
+            Path: /forgotpassword
+            Method: post
+
+  BeatsResendSignUpLinkApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: ResendSignUpLinkApi
+      StageName: ResendSignUpLink
+      OpenApiVersion: "2.0"  
+  ResendSignUpLinkGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsResendSignUpLinkApi
+  ResendSignUpLinkFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.resendEmailForSignup
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        ResendSignUp:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsResendSignUpLinkApi
+            Path: /resendSignUpEmail
+            Method: post          
+
+  BeatsMasterPayerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: GetPayerApi
+      StageName: GetPayer
+      OpenApiVersion: "2.0"
+      Auth:
+        Authorizers:
+          BeatsPayerAuthorizer:
+            UserPoolArn: '{{resolve:ssm:UserPoolArn:1}}'
+            Identity:
+              Header: Authorization          
+  GatewayPayerResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsMasterPayerApi
+  GetMasterPayer:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.getPayerDetails
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        MasterPayerApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsMasterPayerApi
+            Path: /getpayer
+            Method: get   
+            Auth:
+              Authorizer: BeatsPayerAuthorizer  
+
+  FetchProviderScreenStatus:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.screenStatus
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        MasterPayerApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsMasterPayerApi
+            Path: /fetchscreenstatus
+            Method: post
+            Auth:
+              Authorizer: BeatsPayerAuthorizer 
+  BeatsGetServiceConfigApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: GetServiceConfigApi
+      StageName: GetServiceConfig
+      OpenApiVersion: "2.0"
+      Auth:
+        Authorizers:
+          BeatsGetServiceAuthorizer:
+            UserPoolArn: '{{resolve:ssm:UserPoolArn:1}}'
+            Identity:
+              Header: Authorization
+  GatewayGetServiceConfigResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsGetServiceConfigApi
+  GetServiceType:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.getServiceType
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        GetServiceTypeApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsGetServiceConfigApi
+            Path: /getservicetypes
+            Method: get
+            Auth:
+              Authorizer: BeatsGetServiceAuthorizer
+  updatePassword:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SignIn/
+      Handler: app.updatePassword
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsGetServiceConfigApi
+            Path: /updatePassword
+            Method: post
+            Auth:
+              Authorizer: BeatsGetServiceAuthorizer
+#Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  #SignInApi:
+    #Description: "API Gateway endpoint URL for Prod stage for SignIn function"
+    #Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  #SignInFunction:
+    #Description: "SignIn Lambda Function ARN"
+    #Value: !GetAtt SignInFunction.Arn
+  #SignInFunctionIamRole:
+    #Description: "Implicit IAM Role created for SignIn function"
+    #Value: !GetAtt SignInFunctionRole.Arn

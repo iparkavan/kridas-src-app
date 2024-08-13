@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: 
+  SAM Template for beats era parsing
+
+Globals:
+  Function:
+    Runtime: python3.9
+    MemorySize: 512 # MB
+
+Parameters:
+  EnvTypeParameter:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - uat
+      - prod
+    Description: "Enter dev, uat, or prod. Default is dev."
+
+Resources:
+  # LAMBDA FUNCTION
+  EraParserLambdaFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: beats-bulk-era-parser
+      Timeout: 60 # secs
+      Description: era parser
+      CodeUri: src
+      Handler: era_parser.lambda_handler
+      Layers:
+        - !Ref Edi835ParserLayers
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonSSMReadOnlyAccess
+        - AmazonS3FullAccess
+        - AWSBatchServiceEventTargetRole
+      Events:
+        EventBridgeEvent:
+          Type: EventBridgeRule
+          Properties:
+            Pattern:
+              source:
+                - aws.s3
+              detail-type:
+                - "Object Created"
+              detail:
+                bucket:
+                  name: 
+                    - !Sub "beats-bulk-storage-${EnvTypeParameter}"
+                object:
+                  key:
+                    - prefix: bulk-era-upload
+
+  # LAMBDA LAYERS
+  Edi835ParserLayers:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: era-parser-lambda-layer
+        Description: "LambdaLayer era-parser-lambda-layer"
+        ContentUri: dependencies/era-parser-lambda-layer/.
+        CompatibleRuntimes:
+          - python3.9
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: python3.9
+
+
+Outputs:
+  EraParserLambdaFunctionARN:
+    Description: "Lambda Function ARN"
+    Value: !GetAtt EraParserLambdaFunction.Arn
+
+  

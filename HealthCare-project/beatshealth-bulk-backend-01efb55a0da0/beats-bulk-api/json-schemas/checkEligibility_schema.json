@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "",
+  "title": "checkEligibility",
+  "description": "checkEligibility endpoint json schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "patients": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/patient"}
+    }
+  },
+  "required": ["patients"],
+  "$defs": {
+    "patient": {
+      "type": "object",
+      "required": [
+        "firstName", 
+        "lastName",
+        "dob",
+        "fromDateOfService",
+        "toDateOfService",
+        "mrn",
+        "payerId",
+        "serviceType",
+        "memberId",
+        "providerNPI",
+        "clientId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Patient first name - required",
+          "minLength": 1,
+          "maxLength": 45
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Patient last name - required",
+          "minLength": 1,
+          "maxLength": 45
+        },
+        "dob": {  
+          "type": "string",
+          "description": "Patient date of birth: MM/DD/YYYY format - required"
+        },
+        "fromDateOfService": {
+          "type": "string",
+          "description": "Patient starting/from date of service: MM/DD/YYYY format - required"
+        },
+        "toDateOfService": {
+          "type": "string",
+          "description": "Patient date of service: MM/DD/YYYY format - required"
+        },
+        "mrn":{
+          "type": "string",
+          "description": "MRN/Patient Account Number",
+          "minLength": 1,
+          "maxLength": 45
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Patient service type - required",
+          "enum": [
+            "1","2","3","4","5","6","7","8","9","10","11","12",
+            "13","14","15","16","17","18","19","20","21","22",
+            "23","24","25","26","27","28","30","32","33","34",
+            "35","36","37","38","39","40","41","42","43","44",
+            "45","46","47","48","49","50","51","52","53","54",
+            "55","56","57","58","59","60","61","62","63","64",
+            "65","66","68","69","70","71","72","73","74","75",
+            "76","77","78","79","80","81","82","83","84","85",
+            "86","87","88","89","90","91","92","93","94","95",
+            "96","97","98","99","A0","A1","A2","A3","A4","A5",
+            "A6","A7","A8","A9","AA","AB","AC","AD","AE","AF",
+            "AG","AH","AI","AJ","AK","AL","AM","AN","AO","AQ",
+            "AR","B1","B2","B3","BA","BB","BC","BD","BE","BF",
+            "BG","BH","BI","BJ","BK","BL","BM","BN","BP","BQ",
+            "BR","BS","BT","BU","BV","BW","BX","BY","BZ","C1",
+            "CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ",
+            "CK","CL","CM","CN","CO","CP","CQ","DG","DM","DS",
+            "GF","GN","GY","IC","MH","NI","ON","PT","PU","RN",
+            "RT","TC","TN","UC"
+          ]
+        },
+        "payerId": {
+          "type": "string",
+          "description": "Insurance payer ID - required",
+          "minLength": 1,
+          "maxLength": 45
+        },
+        "memberId": {
+          "type": "string",
+          "description": "Member/Subscriber ID - required",
+          "minLength": 1,
+          "maxLength": 45
+        },
+        "providerNPI": {
+          "type": "integer",
+          "description": "Provider NPI - 10 digit - required",
+          "minimum": 1000000000,
+          "maximum": 9999999999
+        },
+        "clientId": {
+          "type": "integer",
+          "description": "Client ID - required",
+          "minLength": 1,
+          "maxLength": 45
+        }
+      }
+    }
+  }
+}

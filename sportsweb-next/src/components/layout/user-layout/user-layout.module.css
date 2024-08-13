@@ -1,0 +1,46 @@
+.topcorner {
+  position: absolute;
+  top: -20px;
+  margin: 0;
+  bottom: 0;
+  right: 0;
+  height: 20px;
+  width: 25px;
+  background: #edf2f7;
+}
+
+.topcorner:after {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 25px;
+  background: white;
+  border-radius: 0 0 50px 0;
+}
+
+.bottomcorner {
+  position: absolute;
+  top: 50px;
+  margin: 0;
+  bottom: 0;
+  right: 0;
+  height: 20px;
+  width: 25px;
+  background: #edf2f7;
+}
+
+.bottomcorner:after {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 25px;
+  background: white;
+  border-radius: 0 50px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .topcorner,
+  .bottomcorner {
+    display: none;
+  }
+}

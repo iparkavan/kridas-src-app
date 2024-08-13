@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,CAAC;EACT,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,iBAAiB;EACxB,MAAM,EAAE,KAAK;EACb,WAAW,EAAE,IAAI;EACjB,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;CACnB",
+    "sources": [
+        "pagenotfoundpage.scss"
+    ],
+    "names": [],
+    "file": "pagenotfoundpage.css"
+}

@@ -1,0 +1,13 @@
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 16px;
+  margin-bottom: 0em;
+  border-radius: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.editor::-webkit-scrollbar {
+  display: none;
+}

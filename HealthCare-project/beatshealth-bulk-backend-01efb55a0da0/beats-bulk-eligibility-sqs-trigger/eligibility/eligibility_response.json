@@ -1,0 +1,1140 @@
+{
+    "links": {
+        "coverageResponse": {
+            "href": "https://api.availity.com/availity/sdk/v1/dfs/ZDZtMEJEUElSall3bTdheFk1M0dhL21kRWVRdmhQd05lWTI4eDR6bGt0ZEV4bFNZOEwyaVdXaCtBL0lyZ2k5M2x3Zkw4TkZ0TWRNSkxpM3lqQTJieUFkaEtGbTVoekd6V3BlR2pQMTQvVjg5NUlJRFp5Q1JVUkZhL05lV2dlN0ttQXZmNzNhNTJrNG50K1JhU3dkOEpqb2RmbkNCUFU3UHN0WnIyVWNxVEo2akYvVDNvVnNwRGlHaUtDcG11OTVDWmJXVlZyTkV2ZWQyV0w3VDYwclBEbGdZSlJZUDVETHYxRmlMcmhsdGY3eVRMeTc0RFhTbXE1VEdaRkhyM2ZMK1hXa1NiWWFPWHd1QTEyYzZKeXFmMUE9PQ.bin"
+        },
+        "coverageTransaction": {
+            "href": "https://api.availity.com/availity/sdk/v1/transactions/44276106211651930240192300077109"
+        },
+        "coverageRequest": {
+            "href": "https://api.availity.com/availity/sdk/v1/dfs/QnA4azhPRE9GMlpxSnRvUVhldDB2U0FFYmdGZEZyblc2eFp5Uys4RkMrWlUvSnEzTXRackd2c2NiZ0F1bHUrL2xzdEdNQ2UrT1ZTaC9rZjZUd0pNQW9YU20vRUFjNk5PZWNnOXAvUkp6MGJ0b3Q4S1NtTTVZcmYvTWhPWVhNa0VCaDZVaDU4ZnJvdWxEZllQelJIdzVNa3AzMXg0eHVGUUZiSWVYRThoTnBYK3hXOXhYellyaURHcFYyMC8rZGpOU3Jlb2dGNXNDSGdpUnkxOXRxRDg3TGtPaXJFZmFXUVZzT0xFeVl6aXM2TDhNWExZOEQzZTZ5S2RhQ0FuYXZmakwzSkFuejZEeURjMDg2aHROYUp2Ync9PQ.bin"
+        },
+        "self": {
+            "href": "https://api.availity.com/availity/v1/coverages/103046084762165176"
+        }
+    },
+    "id": "103046084762165176",
+    "customerId": "1052120",
+    "controlNumber": "43410953165",
+    "status": "Complete",
+    "statusCode": "4",
+    "createdDate": "2022-05-07T13:30:40.000+0000",
+    "updatedDate": "2022-05-07T13:30:40.000+0000",
+    "expirationDate": "2022-05-08T13:30:40.000+0000",
+    "asOfDate": "2022-03-01T05:00:00.000+0000",
+    "requestedServiceType": [
+        {
+            "code": "30",
+            "value": "Health Benefit Plan Coverage"
+        }
+    ],
+    "subscriber": {
+        "firstName": "SURESH",
+        "middleName": "B",
+        "lastName": "SEKAR",
+        "memberId": "W121560721"
+    },
+    "patient": {
+        "firstName": "MEENAKSHI",
+        "middleName": "C",
+        "lastName": "LAKSHMANAN",
+        "subscriberRelationship": "Spouse",
+        "subscriberRelationshipCode": "01",
+        "gender": "Female",
+        "genderCode": "F",
+        "birthDate": "1982-04-08T05:00:00.000+0000",
+        "address": {
+            "line1": "1001 S STATE ST UNIT 3705",
+            "city": "CHICAGO",
+            "state": "Illinois",
+            "stateCode": "IL",
+            "zipCode": "60605"
+        },
+        "updateYourRecords": false
+    },
+    "payer": {
+        "name": "60054",
+        "payerId": "60054",
+        "responseName": "AETNA INC",
+        "responsePayerId": "953402799",
+        "thirdPartyAdministrator": false
+    },
+    "requestingProvider": {
+        "lastName": "Lee",
+        "npi": "1275662835"
+    },
+    "plans": [
+        {
+            "status": "Active Coverage",
+            "statusCode": "1",
+            "groupNumber": "010927101200001",
+            "groupName": "INFOSYS LIMITED",
+            "planNumber": "0109271",
+            "serviceDate": "2022-03-01T05:00:00.000+0000",
+            "planStartDate": "2022-02-25T05:00:00.000+0000",
+            "eligibilityStartDate": "2019-06-01T04:00:00.000+0000",
+            "contacts": [
+                {
+                    "category": "Other Source of Data",
+                    "categoryCode": "W",
+                    "type": "Payer",
+                    "typeCode": "PR",
+                    "name": "Aetna",
+                    "address": {
+                        "line1": "PO Box 981106",
+                        "city": "El Paso",
+                        "state": "Texas",
+                        "stateCode": "TX",
+                        "zipCode": "79998"
+                    }
+                }
+            ],
+            "benefits": [
+                {
+                    "name": "Health Benefit Plan Coverage",
+                    "type": "30",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "insuranceType": "Point of Service (POS)",
+                                "insuranceTypeCode": "PS",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "description": "Aetna Choice POS II"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "outOfPocket": {
+                            "inNetwork": [
+                                {
+                                    "amount": "2000",
+                                    "units": "USD",
+                                    "level": "Individual",
+                                    "levelCode": "IND",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS"
+                                    ]
+                                },
+                                {
+                                    "amount": "6000",
+                                    "units": "USD",
+                                    "level": "Family",
+                                    "levelCode": "FAM",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS"
+                                    ]
+                                },
+                                {
+                                    "units": "USD",
+                                    "remaining": "1398.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "level": "Individual",
+                                    "levelCode": "IND"
+                                },
+                                {
+                                    "units": "USD",
+                                    "remaining": "5398.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "level": "Family",
+                                    "levelCode": "FAM"
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "4500",
+                                    "units": "USD",
+                                    "level": "Individual",
+                                    "levelCode": "IND"
+                                },
+                                {
+                                    "amount": "13500",
+                                    "units": "USD",
+                                    "level": "Family",
+                                    "levelCode": "FAM"
+                                },
+                                {
+                                    "units": "USD",
+                                    "remaining": "3898.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "level": "Individual",
+                                    "levelCode": "IND"
+                                },
+                                {
+                                    "units": "USD",
+                                    "remaining": "12898.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "level": "Family",
+                                    "levelCode": "FAM"
+                                }
+                            ]
+                        },
+                        "deductibles": {
+                            "inNetwork": [
+                                {
+                                    "amount": "436.86",
+                                    "units": "USD",
+                                    "amountTimePeriod": "Year to Date",
+                                    "amountTimePeriodCode": "24",
+                                    "remaining": "2263.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "total": "2700",
+                                    "totalTimePeriod": "Contract",
+                                    "totalTimePeriodCode": "25",
+                                    "level": "Family",
+                                    "levelCode": "FAM",
+                                    "planStartDate": "2021-04-01T04:00:00.000+0000",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "DED INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "436.86",
+                                    "units": "USD",
+                                    "amountTimePeriod": "Year to Date",
+                                    "amountTimePeriodCode": "24",
+                                    "remaining": "463.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "total": "900",
+                                    "totalTimePeriod": "Contract",
+                                    "totalTimePeriodCode": "25",
+                                    "level": "Individual",
+                                    "levelCode": "IND",
+                                    "planStartDate": "2021-04-01T04:00:00.000+0000",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "DED INCLUDED IN OOP"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "436.86",
+                                    "units": "USD",
+                                    "amountTimePeriod": "Year to Date",
+                                    "amountTimePeriodCode": "24",
+                                    "remaining": "10063.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "total": "10500",
+                                    "totalTimePeriod": "Contract",
+                                    "totalTimePeriodCode": "25",
+                                    "level": "Family",
+                                    "levelCode": "FAM",
+                                    "planStartDate": "2021-04-01T04:00:00.000+0000",
+                                    "payerNotes": [
+                                        "DED INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "436.86",
+                                    "units": "USD",
+                                    "amountTimePeriod": "Year to Date",
+                                    "amountTimePeriodCode": "24",
+                                    "remaining": "3063.14",
+                                    "remainingTimePeriod": "Remaining",
+                                    "remainingTimePeriodCode": "29",
+                                    "total": "3500",
+                                    "totalTimePeriod": "Contract",
+                                    "totalTimePeriodCode": "25",
+                                    "level": "Individual",
+                                    "levelCode": "IND",
+                                    "planStartDate": "2021-04-01T04:00:00.000+0000",
+                                    "payerNotes": [
+                                        "DED INCLUDED IN OOP"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "limitations": {
+                        "notApplicableNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "This plan may require precert for certain services. To check if one is required please refer to the Code Search Tool on the Aetna website or submit a Precert transaction."
+                                ]
+                            }
+                        ],
+                        "noNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "Plan includes NAP, but program limitations may apply in relation to Third Party Discount Networks. Final determination is made at the time of claim processing.",
+                                    "We are unable to determine your participation status with this patient's network.",
+                                    "APCN Plus 08907 08909 08913 08915 08917 08919 08921 08923 08925 08927 08929 08931 08933 08935 08937 08941 08943 08945 08951 08953 08979 08985 09164 09718 10330 11246 11322",
+                                    "SELF-FUNDED"
+                                ]
+                            }
+                        ]
+                    },
+                    "unlimited": {
+                        "noNetwork": [
+                            {
+                                "amountTimePeriod": "Lifetime",
+                                "amountTimePeriodCode": "32",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Chiropractic",
+                    "type": "33",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "coPayment": {
+                            "inNetwork": [
+                                {
+                                    "amount": "55",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Office",
+                                    "placeOfServiceCode": "11",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Chiropractor Visit or Evaluation,COPAY INCLUDED IN OOP",
+                                        "Lab Performed by Chiropractor,COPAY INCLUDED IN OOP",
+                                        "Xray by Chiropractor,COPAY INCLUDED IN OOP",
+                                        "Manipulation by Chiropractor,COPAY INCLUDED IN OOP"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Chiropractor Visit or Evaluation",
+                                        "Lab Performed by Chiropractor",
+                                        "Xray by Chiropractor",
+                                        "Manipulation by Chiropractor"
+                                    ]
+                                }
+                            ]
+                        },
+                        "coInsurance": {
+                            "inNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Office",
+                                    "placeOfServiceCode": "11",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Chiropractor Visit or Evaluation",
+                                        "Lab Performed by Chiropractor",
+                                        "Xray by Chiropractor",
+                                        "Manipulation by Chiropractor"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Chiropractor Visit or Evaluation,COINS APPLIES TO OUT OF POCKET",
+                                        "Lab Performed by Chiropractor,COINS APPLIES TO OUT OF POCKET",
+                                        "Xray by Chiropractor,COINS APPLIES TO OUT OF POCKET",
+                                        "Manipulation by Chiropractor,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "limitations": {
+                        "inNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "placeOfService": "Office",
+                                "placeOfServiceCode": "11",
+                                "payerNotes": [
+                                    "MAXIMUM SAVINGS",
+                                    "Chiropractor Visit or Evaluation/Plan Ded Waived",
+                                    "Lab Performed by Chiropractor/Plan Ded Waived",
+                                    "Xray by Chiropractor/Plan Ded Waived",
+                                    "Manipulation by Chiropractor/Plan Ded Waived"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Dental Care",
+                    "type": "35",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Emergency Services",
+                    "type": "86",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "coPayment": {
+                            "inNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Non Emergency use of Emergency Room",
+                                        "Emergency Room Physician"
+                                    ]
+                                },
+                                {
+                                    "amount": "150",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Emergency use of Emergency Room,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "50",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Urgent Care,COPAY INCLUDED IN OOP"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Non Emergency use of Emergency Room",
+                                        "Emergency Room Physician"
+                                    ]
+                                },
+                                {
+                                    "amount": "150",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Emergency use of Emergency Room,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Urgent Care"
+                                    ]
+                                }
+                            ]
+                        },
+                        "coInsurance": {
+                            "inNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Non Emergency use of Emergency Room,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                },
+                                {
+                                    "amount": ".2",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Emergency Room Physician,COINS APPLIES TO OUT OF POCKET",
+                                        "Emergency use of Emergency Room,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                },
+                                {
+                                    "amount": "0",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Urgent Care"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Non Emergency use of Emergency Room,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                },
+                                {
+                                    "amount": ".2",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Emergency Room Physician,COINS APPLIES TO OUT OF POCKET",
+                                        "Emergency use of Emergency Room,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                },
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Urgent Care,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "limitations": {
+                        "inNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "MAXIMUM SAVINGS",
+                                    "Emergency Room Physician/Plan Ded Waived",
+                                    "Emergency use of Emergency Room/Plan Ded Waived"
+                                ]
+                            },
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "MAXIMUM SAVINGS",
+                                    "Urgent Care/Plan Ded Waived"
+                                ]
+                            }
+                        ],
+                        "outOfNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "Emergency Room Physician/Plan Ded Waived",
+                                    "Emergency use of Emergency Room/Plan Ded Waived"
+                                ]
+                            }
+                        ]
+                    },
+                    "nonCovered": {
+                        "notApplicableNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "Non Urgent Services at an Urgent Care Facility/EXCLUSION"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Hospital",
+                    "type": "47",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Hospital - Inpatient",
+                    "type": "48",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "coPayment": {
+                            "inNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Medical Ancillary",
+                                        "Semi Private Room and Board",
+                                        "Intensive Care"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Semi Private Room and Board",
+                                        "Intensive Care"
+                                    ]
+                                },
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Inpatient Hospital",
+                                    "placeOfServiceCode": "21",
+                                    "payerNotes": [
+                                        "Facility"
+                                    ]
+                                }
+                            ]
+                        },
+                        "coInsurance": {
+                            "inNetwork": [
+                                {
+                                    "amount": ".2",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Medical Ancillary,COINS APPLIES TO OUT OF POCKET",
+                                        "Semi Private Room and Board,COINS APPLIES TO OUT OF POCKET",
+                                        "Intensive Care,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Semi Private Room and Board,COINS APPLIES TO OUT OF POCKET",
+                                        "Intensive Care,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                },
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Inpatient Hospital",
+                                    "placeOfServiceCode": "21",
+                                    "payerNotes": [
+                                        "Facility,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Hospital - Outpatient",
+                    "type": "50",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "coPayment": {
+                            "inNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "On Campus-Outpatient Hospital",
+                                    "placeOfServiceCode": "22",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Facility"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "On Campus-Outpatient Hospital",
+                                    "placeOfServiceCode": "22",
+                                    "payerNotes": [
+                                        "Facility"
+                                    ]
+                                }
+                            ]
+                        },
+                        "coInsurance": {
+                            "inNetwork": [
+                                {
+                                    "amount": ".2",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "On Campus-Outpatient Hospital",
+                                    "placeOfServiceCode": "22",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Facility,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "On Campus-Outpatient Hospital",
+                                    "placeOfServiceCode": "22",
+                                    "payerNotes": [
+                                        "Facility,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Medical Care",
+                    "type": "1",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Mental Health",
+                    "type": "MH",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Pharmacy",
+                    "type": "88",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Professional (Physician) Visit - Office",
+                    "type": "98",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "coPayment": {
+                            "inNetwork": [
+                                {
+                                    "amount": "55",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Office",
+                                    "placeOfServiceCode": "11",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "GYN Visit,COPAY INCLUDED IN OOP",
+                                        "Specialist Visit or Evaluation,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "25",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Office",
+                                    "placeOfServiceCode": "11",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "GYN Visit by Primary Care Physician,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "15",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Walk In Clinic Visit,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "25",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Office",
+                                    "placeOfServiceCode": "11",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Primary Care Visit or Evaluation,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "25",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Telemedicine General Medicine Visit,COPAY INCLUDED IN OOP"
+                                    ]
+                                },
+                                {
+                                    "amount": "55",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Telemedicine Specialist Visit,COPAY INCLUDED IN OOP"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "GYN Visit",
+                                        "Specialist Visit or Evaluation",
+                                        "Walk In Clinic Visit",
+                                        "Primary Care Visit or Evaluation",
+                                        "Telemedicine General Medicine Visit",
+                                        "Telemedicine Specialist Visit"
+                                    ]
+                                }
+                            ]
+                        },
+                        "coInsurance": {
+                            "inNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "placeOfService": "Office",
+                                    "placeOfServiceCode": "11",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "GYN Visit",
+                                        "Specialist Visit or Evaluation",
+                                        "Primary Care Visit or Evaluation"
+                                    ]
+                                },
+                                {
+                                    "amount": "0",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Walk In Clinic Visit",
+                                        "Telemedicine General Medicine Visit",
+                                        "Telemedicine Specialist Visit"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "GYN Visit,COINS APPLIES TO OUT OF POCKET",
+                                        "Specialist Visit or Evaluation,COINS APPLIES TO OUT OF POCKET",
+                                        "Walk In Clinic Visit,COINS APPLIES TO OUT OF POCKET",
+                                        "Primary Care Visit or Evaluation,COINS APPLIES TO OUT OF POCKET",
+                                        "Telemedicine General Medicine Visit,COINS APPLIES TO OUT OF POCKET",
+                                        "Telemedicine Specialist Visit,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "limitations": {
+                        "inNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "placeOfService": "Office",
+                                "placeOfServiceCode": "11",
+                                "payerNotes": [
+                                    "MAXIMUM SAVINGS",
+                                    "GYN Visit/Plan Ded Waived",
+                                    "Specialist Visit or Evaluation/Plan Ded Waived",
+                                    "Primary Care Visit or Evaluation/Plan Ded Waived"
+                                ]
+                            },
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "MAXIMUM SAVINGS",
+                                    "Walk In Clinic Visit/Plan Ded Waived",
+                                    "Telemedicine General Medicine Visit/Plan Ded Waived",
+                                    "Telemedicine Specialist Visit/Plan Ded Waived"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Urgent Care",
+                    "type": "UC",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    },
+                    "amounts": {
+                        "coPayment": {
+                            "inNetwork": [
+                                {
+                                    "amount": "50",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Urgent Care,COPAY INCLUDED IN OOP"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "USD",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Urgent Care"
+                                    ]
+                                }
+                            ]
+                        },
+                        "coInsurance": {
+                            "inNetwork": [
+                                {
+                                    "amount": "0",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "MAXIMUM SAVINGS",
+                                        "Urgent Care"
+                                    ]
+                                }
+                            ],
+                            "outOfNetwork": [
+                                {
+                                    "amount": ".5",
+                                    "units": "Percent",
+                                    "level": "Employee and Spouse",
+                                    "levelCode": "ESP",
+                                    "payerNotes": [
+                                        "Urgent Care,COINS APPLIES TO OUT OF POCKET"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "limitations": {
+                        "inNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "MAXIMUM SAVINGS",
+                                    "Urgent Care/Plan Ded Waived"
+                                ]
+                            }
+                        ]
+                    },
+                    "nonCovered": {
+                        "notApplicableNetwork": [
+                            {
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP",
+                                "payerNotes": [
+                                    "Non Urgent Services at an Urgent Care Facility/EXCLUSION"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Vision (Optometry)",
+                    "type": "AL",
+                    "status": "Active Coverage",
+                    "statusCode": "1",
+                    "statusDetails": {
+                        "noNetwork": [
+                            {
+                                "status": "Active Coverage",
+                                "statusCode": "1",
+                                "level": "Employee and Spouse",
+                                "levelCode": "ESP"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "insuranceType": "Point of Service (POS)",
+            "insuranceTypeCode": "PS"
+        }
+    ],
+    "supplementalInformation": {
+        "professionalPatientCostEstimator": false,
+        "institutionalPatientCostEstimator": false,
+        "patientCareSummary": false,
+        "assessmentCarePlan": false,
+        "outOfArea": false,
+        "requestLtssccAmount": false,
+        "erReferralCompleted": false,
+        "functionalIdentifierCode": "HB",
+        "applicationSenderCode": "RTE_5010",
+        "eligibleForCOB": false
+    },
+    "hasHRAInformation": false
+}

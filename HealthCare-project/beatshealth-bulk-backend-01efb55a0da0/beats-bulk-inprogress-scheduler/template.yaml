@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Create a Lambda function that read from data db and send to sqs from a cron job in EventBridge
+
+
+Resources:
+  CronFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Description: "A Lambda function that sends In progress records to avalitity API"
+      Code: retry/
+      Handler: "index.handler"
+      Runtime: "nodejs14.x"
+      Timeout: "30"
+      Environment:
+        Variables:
+            region: '{{resolve:ssm:region:1}}' 
+            DefaultPass: '{{resolve:ssm:DefaultPass:1}}'
+            RDS_HOSTNAME: '{{resolve:ssm:RDS_HOSTNAME:1}}'
+            RDS_USERNAME: '{{resolve:ssm:RDS_USERNAME:1}}'
+            RDS_PASSWORD: '{{resolve:ssm:RDS_PASSWORD:1}}'
+            RDS_PORT: '{{resolve:ssm:RDS_PORT:1}}'
+            RDS_DATABASE: '{{resolve:ssm:RDS_DATABASE:1}}'
+            CLAIMS_EXTERNAL_API_INPUT_QUEUE: '{{resolve:ssm:CLAIMS_EXTERNAL_API_INPUT_QUEUE:1}}'
+            AVAILITY_ELIGIBILITY_INPUT_SQS: '{{resolve:ssm:AVAILITY_ELIGIBILITY_INPUT_SQS:1}}'
+            accessKeyId: '{{resolve:ssm:accessKeyId:1}}'
+            secretAccessKey: '{{resolve:ssm:secretAccessKey:1}}'
+      Role: !GetAtt LambdaExecutionRole.Arn
+        
+      
+  LambdaExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: "beats-bulk-claim-inprogress-schedule"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+              - logs:*
+              Resource: "*"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        
+  CronEvent: 
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: rate(1 minute)  #when the event should trigger
+      Targets:
+        - Arn:
+            Fn::GetAtt: [ CronFunction , "Arn" ] 
+          Id:
+            Ref: CronFunction 
+            
+  LambdaInvokePermission: 
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Fn::GetAtt: [ CronFunction ,"Arn" ] 
+      Action: lambda:InvokeFunction 
+      Principal: events.amazonaws.com #grant permission to the events system
+      SourceArn:
+        Fn::GetAtt: [ CronEvent , "Arn" ] #define which event is allowed to trigger lambdas 

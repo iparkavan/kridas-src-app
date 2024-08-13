@@ -1,0 +1,131 @@
+.hwlo{
+    background-color: red;
+    height: 100px;
+    width: 90px;
+  }
+  .bgc{
+    background-color: rgb(94, 13, 13);
+  }
+  .bgc1{
+    background-color: royalblue;
+  }
+
+.noBar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.noBar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: 600px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  background-color: rgba(0, 0, 0, 0.438);
+  opacity: 0.2;
+
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #04AA6D;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+
+.HoverContainer {
+  position: absolute;
+  top: 0;
+  left:o;
+  background-color: rgba(0, 0, 0, 0.432);
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: none;
+
+}
+.PhotoContainer {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation:fadeIn linear 4s;
+  /* transition:  4s; */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.PhotoContainer:hover .HoverContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+  color: white;
+}
+
+
+.errMsg{
+  padding-top: 10%;
+}
+.HdrBG{
+  background: linear-gradient(90deg, #EC008C 0%, #FC6767 100%);
+  /* height: 132px;
+  width: 1186px;
+  left: 99px;
+  top: 212px; */
+  border-radius: 2px;
+}
+.HdrBG1{
+  /* height: 132px;
+  width: 1186px;
+  left: 99px;
+  top: 212px; */
+  border-radius: 2px;
+}
+.hvrMe:hover{
+border-bottom:  5px solid black;
+cursor:pointer;
+/* padding-top: 10px; */
+}
+.inp{
+  border: none;
+  border-bottom: 5px solid black;
+}

@@ -1,0 +1,13 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "beats-bulk-inprogress-scheduler"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-qxau92e87iln"
+s3_prefix = "beats-bulk-inprogress-scheduler"
+region = "us-east-2"
+profile = "beats-bulk-prod"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+confirm_changeset = true
+disable_rollback = true

@@ -1,0 +1,238 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  beats-bulk-admin
+
+  Sample SAM Template for beats-bulk-admin
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 10
+    Environment:
+      Variables:
+        region: '{{resolve:ssm:region:1}}' 
+        UserPoolId: '{{resolve:ssm:UserPoolId:1}}'
+        ClientIdWithSecret: '{{resolve:ssm:ClientIdWithSecret:1}}'
+        ClientIdWithSecretSecret: '{{resolve:ssm:ClientIdWithSecretSecret:1}}'
+        ClientId: '{{resolve:ssm:ClientId:1}}'
+        DefaultPass: '{{resolve:ssm:DefaultPass:1}}'
+        S3_BUCKET_NAME: '{{resolve:ssm:S3_BUCKET_NAME:1}}'
+        S3_ACCESSKEYID: '{{resolve:ssm:S3_ACCESSKEYID:1}}'
+        S3_SECRETACCESSKEY: '{{resolve:ssm:S3_SECRETACCESSKEY:1}}'
+        MAPPING_QUEUE: '{{resolve:ssm:MAPPING_QUEUE:1}}'
+        RDS_HOSTNAME: '{{resolve:ssm:RDS_HOSTNAME:1}}'
+        RDS_USERNAME: '{{resolve:ssm:RDS_USERNAME:1}}'
+        RDS_PASSWORD: '{{resolve:ssm:RDS_PASSWORD:1}}'
+        RDS_PORT: '{{resolve:ssm:RDS_PORT:1}}'
+        RDS_DATABASE: '{{resolve:ssm:RDS_DATABASE:1}}'
+        accessKeyId: '{{resolve:ssm:accessKeyId:1}}'
+        secretAccessKey: '{{resolve:ssm:secretAccessKey:1}}'
+  Api:
+    Cors:
+      AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,is-update,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+      AllowOrigin: "'*'"
+      
+Resources:
+  BeatsSubscriberDetailsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: admin
+      StageName: admin
+      OpenApiVersion: "2.0"
+      Auth:
+        Authorizers:
+          BeatsUserAuthorizer:
+            UserPoolArn: '{{resolve:ssm:UserPoolArn:1}}'
+            Identity:
+              Header: Authorization
+  GatewayPostSubscriberDetailsResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsSubscriberDetailsApi
+  SaveSubscriberDetails:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Subscriber/
+      Handler: app.saveSubscriberDetails
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /saveSubscriberDetails
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  FetchSubscriberDetails:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Subscriber/
+      Handler: app.fetchSubscriberDetails
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /fetchSubscriberDetails
+            Method: get
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  updateSubscriberDetails:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Subscriber/
+      Handler: app.updateSubscriberDetails
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /updateSubscriberDetails
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  saveAdminConfig:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Config/
+      Handler: app.saveAdminConfig
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /saveAdminConfig
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  fetchAdminConfig:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Config/
+      Handler: app.fetchAdminConfig
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /fetchAdminConfig
+            Method: get
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  updateAdminConfig:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Config/
+      Handler: app.updateAdminConfig
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /updateAdminConfig
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  
+  fetchPresignedUrlForDownload:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Mapping/
+      Handler: app.fetchPresignedUrlForDownload
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /fetchPresignedUrlForDownload
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+  
+  fetchPresignedUrlForUpload:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Mapping/
+      Handler: app.fetchPresignedUrlForUpload
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        PostSubscriberApi:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsSubscriberDetailsApi
+            Path: /fetchPresignedUrlForUpload
+            Method: post
+            Auth:
+              Authorizer: BeatsUserAuthorizer
+
+  fetchScreenStatus:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: Mapping/
+        Handler: app.fetchScreenStatus
+        Runtime: nodejs14.x
+        Timeout: 30
+        Events:
+          PostSubscriberApi:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              RestApiId: !Ref BeatsSubscriberDetailsApi
+              Path: /fetchScreenStatus
+              Method: get
+              Auth:
+                Authorizer: BeatsUserAuthorizer
+  fetchLastUploadInfo:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: Mapping/
+        Handler: app.fetchLastUploadInfo
+        Runtime: nodejs14.x
+        Timeout: 30
+        Events:
+          PostSubscriberApi:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              RestApiId: !Ref BeatsSubscriberDetailsApi
+              Path: /fetchLastUploadInfo
+              Method: get
+              Auth:
+                Authorizer: BeatsUserAuthorizer
+  mappingQueueNotification:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: Mapping/
+        Handler: app.mappingQueueNotification
+        Runtime: nodejs14.x
+        Timeout: 30
+        Events:
+          PostSubscriberApi:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              RestApiId: !Ref BeatsSubscriberDetailsApi
+              Path: /mappingQueueNotification
+              Method: post
+              Auth:
+                Authorizer: BeatsUserAuthorizer
+                

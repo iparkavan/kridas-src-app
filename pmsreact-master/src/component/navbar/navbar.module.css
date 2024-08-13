@@ -1,0 +1,45 @@
+.imgstyle {
+	width: auto;
+	height: 60px;
+	cursor: pointer;
+}
+
+.imgstyle__small {
+	width: 20px;
+}
+
+.username {
+	color: #000000;
+	font-weight: 500;
+}
+
+.toolbar__wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border: 0px solid red;
+
+	width: 100%;
+}
+
+.nav__left_section {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nav__user__info {
+	display: grid;
+	grid-template-rows: 1fr;
+	height: 100%;
+}
+
+.useremail {
+	color: #666666;
+}
+
+.profile {
+	color: rgb(175, 174, 174);
+	font-size: 12px;
+}

@@ -1,0 +1,4 @@
+.box h3 {
+  font-size: revert;
+  font-weight: revert;
+}

@@ -1,0 +1,156 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  beats-bulk-signup
+
+  Sample SAM Template for beats-bulk-signup
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 10
+    Environment:
+      Variables:
+        region: '{{resolve:ssm:region:1}}' 
+        UserPoolId: '{{resolve:ssm:UserPoolId:1}}'
+        ClientIdWithSecret: '{{resolve:ssm:ClientIdWithSecret:1}}'
+        ClientIdWithSecretSecret: '{{resolve:ssm:ClientIdWithSecretSecret:1}}'
+        ClientId: '{{resolve:ssm:ClientId:1}}'
+        DefaultPass: '{{resolve:ssm:DefaultPass:1}}'
+        RDS_HOSTNAME: '{{resolve:ssm:RDS_HOSTNAME:1}}'
+        RDS_USERNAME: '{{resolve:ssm:RDS_USERNAME:1}}'
+        RDS_PASSWORD: '{{resolve:ssm:RDS_PASSWORD:1}}'
+        RDS_PORT: '{{resolve:ssm:RDS_PORT:1}}'
+        RDS_DATABASE: '{{resolve:ssm:RDS_DATABASE:1}}'
+        POST_RESET_PASSWORD_VERIFICATION_REDIRECT_URL : '{{resolve:ssm:POST_RESET_PASSWORD_VERIFICATION_REDIRECT_URL:1}}'
+        POST_REGISTRATION_VERIFICATION_REDIRECT_URL : '{{resolve:ssm:POST_REGISTRATION_VERIFICATION_REDIRECT_URL:1}}'
+        verifyUrl : '{{resolve:ssm:verifyUrl:1}}'
+        verifyForgotPasswordUrl : '{{resolve:ssm:verifyForgotPasswordUrl:1}}'
+        homepageurl : '{{resolve:ssm:homepageurl:1}}'
+
+  Api:
+    Cors:
+      AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+      AllowOrigin: "'*'"
+      
+Resources:
+  ForgotPasswordVerificationApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: ForgotPasswordVerificationApi
+      StageName: ForgotPasswordVerification
+      OpenApiVersion: "2.0" 
+  ForgotPasswordVerificationHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SignUp/
+      Handler: app.forgotPasswordVerification
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        ForgotPasswordVerification:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ForgotPasswordVerificationApi
+            Path: /
+            Method: get
+  ForgotPasswordVerificationApi1:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: ForgotPasswordVerificationApi1
+      StageName: ForgotPasswordVerification1
+      OpenApiVersion: "2.0" 
+  ForgotPasswordVerificationHandlerFunction1:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SignUp/
+      Handler: app.forgotPasswordVerification1
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        ForgotPasswordVerification1:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ForgotPasswordVerificationApi1
+            Path: /getNpiDetails
+            Method: get            
+  SignUpVerificationHandlerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignUp/
+      Handler: app.signUpVerificationHandler
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        SignUpVerification:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /
+            Method: get
+  SignUpMessageHandlerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignUp/
+      Handler: app.signUpMessageHandler
+      Runtime: nodejs14.x
+  BeatsUserSignUpApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: UserSignUpApi
+      StageName: UserSignUp
+      OpenApiVersion: "2.0"
+  NpiFetchApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: NpiFetchApi
+      StageName: NpiFetch
+      OpenApiVersion: "2.0"
+  SignUpGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId:
+        Ref: BeatsUserSignUpApi
+  NpiFetchGatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId:
+        Ref: NpiFetchApi                
+  SignUpFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignUp/
+      Handler: app.signUp
+      Runtime: nodejs14.x
+      Events:
+        SignUp:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref BeatsUserSignUpApi
+            Path: /
+            Method: post
+  npiDetailsFetchFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: SignUp/
+      Handler: app.npiDetailsFetch
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        NpiFetch:
+          Type: Api
+          Properties:
+            RestApiId: !Ref NpiFetchApi
+            Path: /
+            Method: get
+       

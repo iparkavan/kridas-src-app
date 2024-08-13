@@ -1,0 +1,7 @@
+﻿Patient First Name,Patient Last Name,Date of Birth,From Date of Service,To Date of Service,MRN / Patient Account #,Payer ID,Service Type,Member ID,Provider NPI,Client ID
+John,Smith,8/1/1984,8/12/2021,8/12/2021,1234,AETNA,30,W123456,1234567890,test_client
+Christine,Wales,10/15/1980,4/99/2021,4/12/2021,35693,G60021,PT,few291093dfj2,2345678901,test_client
+Jose,Xaiver,1/1/2000,4/12/2021,10/15/1982,F3466,G60021,98,f323523,3456789912,test_client
+Gary,Jackson,8/1/1984,8/12/2021,8/12/2021,A3921,Cigna,33,F1234,3456789912,test_client
+Michael,Steele,1/1/2000,4/12/2021,4/14/2021,4567y7,AARP,PT,Bth24rju39,5679011934,test_client
+Sam,Chan,1/2/1800,10/15/1982,4/12/2021,g2345,60023,30,W00123,6790122945,test_client

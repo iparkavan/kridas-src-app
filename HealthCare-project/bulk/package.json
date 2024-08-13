@@ -1,0 +1,90 @@
+{
+  "name": "beatshealth",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/pickers": "^3.3.10",
+    "@material-ui/x-grid": "^4.0.0-alpha.37",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.2.3",
+    "@mui/x-data-grid": "^5.8.0",
+    "@stripe/react-stripe-js": "^1.4.1",
+    "@stripe/stripe-js": "^1.17.1",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/react-select": "^4.0.17",
+    "aws-sdk": "^2.1093.0",
+    "axios": "^0.20.0",
+    "build": "^0.1.4",
+    "date-fns": "^2.28.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "file-saver": "2.0.5",
+    "filefy": "^0.1.11",
+    "formik": "^2.2.9",
+    "material-table": "^1.69.3",
+    "mdbreact": "^5.1.0",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.0",
+    "query-string": "^6.13.1",
+    "react": "^17.0.2",
+    "react-base64-downloader": "^2.1.7",
+    "react-collapsible": "^2.8.4",
+    "react-datepicker": "^4.2.1",
+    "react-dom": "^17.0.2",
+    "react-dropzone": "^10.2.2",
+    "react-dual-listbox": "^2.2.0",
+    "react-flags-select": "^2.1.2",
+    "react-idle-timer": "^4.6.4",
+    "react-images-upload": "^1.2.8",
+    "react-images-uploading": "^3.1.3",
+    "react-loader-spinner": "^4.0.0",
+    "react-modal": "^3.14.3",
+    "react-native": "^0.65.1",
+    "react-native-web": "^0.17.1",
+    "react-phone-number-input": "^3.1.25",
+    "react-router-dom": "^5.2.0",
+    "react-router-guards": "^1.0.2",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "react-time-picker": "^4.4.4",
+    "react-toastify": "^7.0.4",
+    "uuidv4": "^6.2.13",
+    "web-vitals": "^1.1.2",
+    "xlsx": "^0.18.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:dev": "env-cmd -f ./.envdev npm run-script build",
+    "build:uat": "env-cmd -f ./.envuat npm run-script build",
+    "build:prod": "env-cmd -f ./.envprod npm run-script build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

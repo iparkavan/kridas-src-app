@@ -1,0 +1,665 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 
+  beats-bulk-api SAM Template
+
+Globals:
+  Function:
+    Timeout: 10
+    Environment:
+      Variables:
+        region: '{{resolve:ssm:region:1}}' 
+        UserPoolId: '{{resolve:ssm:UserPoolId:1}}'
+        ClientIdWithSecret: '{{resolve:ssm:ClientIdWithSecret:1}}'
+        ClientIdWithSecretSecret: '{{resolve:ssm:ClientIdWithSecretSecret:1}}'
+        ClientId: '{{resolve:ssm:ClientId:1}}'
+        DefaultPass: '{{resolve:ssm:DefaultPass:1}}'
+        S3_BUCKET_NAME: '{{resolve:ssm:S3_BUCKET_NAME:1}}'
+        S3_ACCESSKEYID: '{{resolve:ssm:S3_ACCESSKEYID:1}}'
+        S3_SECRETACCESSKEY: '{{resolve:ssm:S3_SECRETACCESSKEY:1}}'
+        RDS_HOSTNAME: '{{resolve:ssm:RDS_HOSTNAME:1}}'
+        RDS_USERNAME: '{{resolve:ssm:RDS_USERNAME:1}}'
+        RDS_PASSWORD: '{{resolve:ssm:RDS_PASSWORD:1}}'
+        RDS_PORT: '{{resolve:ssm:RDS_PORT:1}}'
+        RDS_DATABASE: '{{resolve:ssm:RDS_DATABASE:1}}'
+        accessKeyId: '{{resolve:ssm:accessKeyId:1}}'
+        secretAccessKey: '{{resolve:ssm:secretAccessKey:1}}'
+  Api:
+    Cors:
+      AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,is-update,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+      AllowOrigin: "'*'"
+
+Parameters:
+  EnvTypeParameter:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - uat
+      - prod
+    Description: "Enter dev, uat, or prod. Default is dev."
+
+Resources:
+
+  # API GATEWAY
+
+  BeatsBulkApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: BeatsBulkApi
+      StageName: 
+        !Ref EnvTypeParameter
+      OpenApiVersion: "2.0"
+      Auth:
+        Authorizers:
+          BeatsBulkAuthorizer:
+            UserPoolArn: '{{resolve:ssm:UserPoolArn:1}}'
+            Identity:
+              Header: Authorization
+      Models:
+        GroupNameMappingModel:
+          type: object
+          required:
+            - mapping
+          properties: 
+            mapping:
+              type: array
+              items: 
+                type: object
+                required: [clientId, clientName, groupName, renderingNPI, billingNPI]
+                minItems: 1
+                uniqueItems: true
+                properties:
+                  clientId:
+                    type: string
+                    description: Client ID - required
+                    minLength: 1
+                    maxLength: 45
+                  clientName:
+                    type: string
+                    description: Client Name - required
+                    minLength: 1
+                    maxLength: 45
+                  groupName:
+                    type: string
+                    description: Group Name - required
+                    minLength: 1
+                    maxLength: 45
+                  renderingNPI:
+                    type: string
+                    description: Provider/Rendering NPI - required
+                    minLength: 10
+                    maxLength: 10 
+                  billingNPI:
+                    type: string
+                    description: Billing NPI - required
+                    minLength: 10
+                    maxLength: 10 
+        ClaimStatusEligibilityModel: 
+          type: object
+          required: 
+            - widget_name
+            - patients
+          properties: 
+            widget_name:
+              type: string
+            patients: 
+              type: array
+              items: 
+                type: object
+                required: [firstName, lastName, dob, fromDateOfService, toDateOfService, mrn, payerId, serviceType, memberId, providerNPI, billingNPI, clientId]
+                minItems: 1
+                uniqueItems: true                  
+                properties:
+                  firstName:
+                    type: string
+                    description: Patient first name - required
+                    minLength: 1
+                    maxLength: 45
+                  lastName:
+                    type: string
+                    description: Patient last name - required
+                    minLength: 1
+                    maxLength: 45
+                  dob:
+                    type: string
+                    description: 'Patient date of birth: MM/DD/YYYY format - required'
+                  fromDateOfService:
+                    type: string
+                    description: 'Patient starting/from date of service: MM/DD/YYYY format - required'
+                  toDateOfService:
+                    type: string
+                    description: 'Patient date of service: MM/DD/YYYY format - required'
+                  mrn:
+                    type: string
+                    description: MRN/Patient Account Number
+                    minLength: 1
+                    maxLength: 45
+                  serviceType:
+                    type: string
+                    description: Patient service type - required
+                    enum:
+                      - '1'
+                      - '2'
+                      - '3'
+                      - '4'
+                      - '5'
+                      - '6'
+                      - '7'
+                      - '8'
+                      - '9'
+                      - '10'
+                      - '11'
+                      - '12'
+                      - '13'
+                      - '14'
+                      - '15'
+                      - '16'
+                      - '17'
+                      - '18'
+                      - '19'
+                      - '20'
+                      - '21'
+                      - '22'
+                      - '23'
+                      - '24'
+                      - '25'
+                      - '26'
+                      - '27'
+                      - '28'
+                      - '30'
+                      - '32'
+                      - '33'
+                      - '34'
+                      - '35'
+                      - '36'
+                      - '37'
+                      - '38'
+                      - '39'
+                      - '40'
+                      - '41'
+                      - '42'
+                      - '43'
+                      - '44'
+                      - '45'
+                      - '46'
+                      - '47'
+                      - '48'
+                      - '49'
+                      - '50'
+                      - '51'
+                      - '52'
+                      - '53'
+                      - '54'
+                      - '55'
+                      - '56'
+                      - '57'
+                      - '58'
+                      - '59'
+                      - '60'
+                      - '61'
+                      - '62'
+                      - '63'
+                      - '64'
+                      - '65'
+                      - '66'
+                      - '68'
+                      - '69'
+                      - '70'
+                      - '71'
+                      - '72'
+                      - '73'
+                      - '74'
+                      - '75'
+                      - '76'
+                      - '77'
+                      - '78'
+                      - '79'
+                      - '80'
+                      - '81'
+                      - '82'
+                      - '83'
+                      - '84'
+                      - '85'
+                      - '86'
+                      - '87'
+                      - '88'
+                      - '89'
+                      - '90'
+                      - '91'
+                      - '92'
+                      - '93'
+                      - '94'
+                      - '95'
+                      - '96'
+                      - '97'
+                      - '98'
+                      - '99'
+                      - A0
+                      - A1
+                      - A2
+                      - A3
+                      - A4
+                      - A5
+                      - A6
+                      - A7
+                      - A8
+                      - A9
+                      - AA
+                      - AB
+                      - AC
+                      - AD
+                      - AE
+                      - AF
+                      - AG
+                      - AH
+                      - AI
+                      - AJ
+                      - AK
+                      - AL
+                      - AM
+                      - AN
+                      - AO
+                      - AQ
+                      - AR
+                      - B1
+                      - B2
+                      - B3
+                      - BA
+                      - BB
+                      - BC
+                      - BD
+                      - BE
+                      - BF
+                      - BG
+                      - BH
+                      - BI
+                      - BJ
+                      - BK
+                      - BL
+                      - BM
+                      - BN
+                      - BP
+                      - BQ
+                      - BR
+                      - BS
+                      - BT
+                      - BU
+                      - BV
+                      - BW
+                      - BX
+                      - BY
+                      - BZ
+                      - C1
+                      - CA
+                      - CB
+                      - CC
+                      - CD
+                      - CE
+                      - CF
+                      - CG
+                      - CH
+                      - CI
+                      - CJ
+                      - CK
+                      - CL
+                      - CM
+                      - CN
+                      - CO
+                      - CP
+                      - CQ
+                      - DG
+                      - DM
+                      - DS
+                      - GF
+                      - GN
+                      - GY
+                      - IC
+                      - MH
+                      - NI
+                      - 'ON'
+                      - PT
+                      - PU
+                      - RN
+                      - RT
+                      - TC
+                      - TN
+                      - UC
+                  payerId:
+                    type: string
+                    description: Insurance payer ID - required
+                    minLength: 1
+                    maxLength: 45
+                  memberId:
+                    type: string
+                    description: Member/Subscriber ID - required
+                    minLength: 1
+                    maxLength: 45
+                  renderingNPI:
+                    type: string
+                    description: Rendering/provider NPI - 10 digit - required
+                    minLength: 10
+                    maxLength: 10
+                  # billingNPI:
+                  #   type: string
+                  #   description: Billing NPI - 10 digit - required
+                  #   minLength: 10
+                  #   maxLength: 10
+                  clientId:
+                    type: string
+                    description: Client ID - required
+                    minLength: 1
+                    maxLength: 45
+
+  GatewayResponseDefault5XX:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+      ResponseType: DEFAULT_5XX
+      RestApiId: !Ref BeatsBulkApi
+
+  GatewayResponseUnauthorized:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+      ResponseType: UNAUTHORIZED
+      RestApiId: !Ref BeatsBulkApi
+
+  GatewayResponseBadRequestBody:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseTemplates:
+        "application/json": "{\"error\": \"Invalid JSON structure.\"}"
+      ResponseType: BAD_REQUEST_BODY
+      RestApiId: !Ref BeatsBulkApi
+
+  
+  # SIGN IN
+  
+  SignInFunction:
+      Type: AWS::Serverless::Function 
+      Properties:
+        CodeUri: src/beats-bulk-api-beats-bulk-signin/SignIn/
+        Handler: app.signIn
+        Runtime: nodejs14.x
+        Timeout: 30
+        Events:
+          SignInAPI:
+            Type: Api 
+            Properties:
+              RestApiId: !Ref BeatsBulkApi
+              Path: /SignIn
+              Method: post  
+
+  
+  # ELIGIBILITY
+  
+  CheckEligibilityFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: checkEligibility_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      MemorySize: 512
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonS3FullAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+      Layers:
+        - !Ref PandasLayer
+        - !Ref RequestsLayer
+        - !Ref OpenpyxlLayer
+      Events:
+        CheckEligibilityApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /benefits/checkEligibility
+            Method: post
+            Auth:
+              Authorizer: BeatsBulkAuthorizer 
+            RequestModel: 
+              Model: ClaimStatusEligibilityModel
+              Required: true
+              ValidateBody: true
+
+  CheckEligibilityTransactionSummaryFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: checkEligibilityTransactionSummary_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+
+      Layers:
+        - !Ref PyMySQLLayer
+      Events:
+        CheckEligibilityTransactionSummaryApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /benefits/checkEligibility/{transaction_id}
+            Method: get
+            Auth:
+              Authorizer: BeatsBulkAuthorizer 
+
+  CheckEligibilityTransactionDetailedFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: checkEligibilityTransactionDetailed_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+      Layers:
+        - !Ref PyMySQLLayer
+      Events:
+        CheckEligibilityTransactionDetailedApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /benefits/checkEligibility/{transaction_id}/{patient_id}
+            Method: get
+            Auth:
+              Authorizer: BeatsBulkAuthorizer 
+
+  
+  # CLAIMS
+
+  CheckClaimStatusFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: checkClaimStatus_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      MemorySize: 512
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonS3FullAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+      Layers:
+        - !Ref PandasLayer
+        - !Ref RequestsLayer
+        - !Ref OpenpyxlLayer
+      Events:
+        CheckClaimStatusApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /benefits/checkClaimStatus
+            Method: post
+            Auth:
+              Authorizer: BeatsBulkAuthorizer 
+            RequestModel: 
+              Model: ClaimStatusEligibilityModel
+              Required: true
+              ValidateBody: true
+
+  CheckClaimStatusTransactionSummaryFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: checkClaimStatusTransactionSummary_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+      Layers:
+        - !Ref PyMySQLLayer
+      Events:
+        CheckClaimStatusTransactionSummaryApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /benefits/checkClaimStatus/{transaction_id}
+            Method: get
+            Auth:
+              Authorizer: BeatsBulkAuthorizer 
+  
+  CheckClaimStatusTransactionDetailedFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: checkClaimStatusTransactionDetailed_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+      Layers:
+        - !Ref PyMySQLLayer
+      Events:
+        CheckClaimStatusTransactionDetailedApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /benefits/checkClaimStatus/{transaction_id}/{patient_id}
+            Method: get
+            Auth:
+              Authorizer: BeatsBulkAuthorizer   
+
+  
+  # GROUP NAME MAPPING UPDATE
+  
+  UpdateGroupNameMappingFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: updateGroupNameMapping_lambda.lambda_handler
+      Runtime: python3.8
+      Timeout: 30
+      Policies:
+        - AWSCloudFormationReadOnlyAccess
+        - AmazonS3FullAccess
+        - AmazonSSMReadOnlyAccess
+        - AmazonAPIGatewayAdministrator
+        - AmazonSQSFullAccess
+      Layers:
+        - !Ref PandasLayer
+        - !Ref OpenpyxlLayer
+      Events:
+        UpdateGroupNameMappingApi:
+          Type: Api 
+          Properties:
+            RestApiId: !Ref BeatsBulkApi
+            Path: /user/updateGroupNameMapping
+            Method: post
+            Auth:
+              Authorizer: BeatsBulkAuthorizer 
+            RequestModel: 
+              Model: GroupNameMappingModel
+              Required: true
+              ValidateBody: true
+
+
+  # LAMBDA LAYERS
+
+  PandasLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: pandas
+        Description: "LambdaLayer pandas"
+        ContentUri: dependencies/pandas/.
+        CompatibleRuntimes:
+          - python3.7
+          - python3.8
+          - python3.9
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: python3.8
+
+  PyMySQLLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: pymysql
+        Description: "LambdaLayer pymysql"
+        ContentUri: dependencies/pymysql/.
+        CompatibleRuntimes:
+          - python3.7
+          - python3.8
+          - python3.9
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: python3.8
+
+  RequestsLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: requests
+        Description: "LambdaLayer requests"
+        ContentUri: dependencies/requests/.
+        CompatibleRuntimes:
+          - python3.7
+          - python3.8
+          - python3.9
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: python3.8
+
+  OpenpyxlLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: openpyxl
+        Description: "LambdaLayer openpyxl"
+        ContentUri: dependencies/openpyxl/.
+        CompatibleRuntimes:
+          - python3.7
+          - python3.8
+          - python3.9
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: python3.8
+
+
+# EXPORTS
+
+Outputs:
+  BeatsBulkApiEndpoint:
+    Description: "Beats Bulk API Endpoint, exported as beats-bulk-api in CloudFormation"
+    Value: !Sub "https://${BeatsBulkApi}.execute-api.${AWS::Region}.amazonaws.com/${EnvTypeParameter}"
+    Export:
+      Name: beats-bulk-api

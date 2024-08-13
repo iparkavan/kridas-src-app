@@ -1,0 +1,63 @@
+.editor {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 2em;
+  box-shadow: inset 0px 1px 8px -3px #ababab;
+  background: #fefefe;
+  width: 90%;
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 250px;
+  width: 90%;
+}
+
+.headlineButtonWrapper {
+  display: inline-block;
+}
+
+.headlineButton {
+  background: #fbfbfb;
+  color: #888;
+  font-size: 18px;
+  border: 0;
+  padding-top: 5px;
+  vertical-align: bottom;
+  height: 34px;
+  width: 36px;
+}
+
+.headlineButton:hover,
+.headlineButton:focus {
+  background: #f3f3f3;
+}
+
+.feed_editor {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 0em;
+  box-shadow: inset 0px 1px 8px -3px #ababab;
+  background: #fffcfc;
+  border: solid var(--chakra-colors-primary-500) 1px;
+  border-radius: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.feed_editor h3 {
+  font-size: revert;
+  font-weight: revert;
+}
+
+.feed_editor::-webkit-scrollbar {
+  display: none;
+}
+
+.feed_editor :global(.public-DraftEditor-content) {
+  min-height: 140px;
+}

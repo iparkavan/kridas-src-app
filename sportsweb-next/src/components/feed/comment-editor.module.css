@@ -1,0 +1,13 @@
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 6px;
+  /* box-shadow: inset 0px 1px 8px -3px #ababab; */
+  border-bottom: solid var(--chakra-colors-primary-500) 1px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.editor::-webkit-scrollbar {
+  display: none;
+}

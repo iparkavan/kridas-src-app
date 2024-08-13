@@ -1,0 +1,116 @@
+.App {
+	text-align: center;
+}
+
+.App-logo {
+	height: 40vmin;
+}
+
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #09d3ac;
+}
+
+main {
+	margin-left: 5rem;
+	padding: 1rem;
+	padding-top: 80px;
+	min-height: 100vh;
+}
+
+body {
+	color: black;
+	background-color: white;
+	margin: 0;
+	padding: 0;
+}
+
+body::-webkit-scrollbar {
+	width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+	background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: #6649b8;
+}
+
+:root {
+	font-size: 16px;
+	font-family: "Roboto";
+	box-sizing: border-box;
+	color: #333333;
+	--text-primary: #ffffff;
+	--text-secondary: #333333;
+	--text-white: #ffffff;
+	--bg-primary: #f4efef;
+	--bg-secondary: #4bb428;
+	--bg-white: #ffffff;
+
+	--bg-theme-primary: #008248;
+	--bg-clr-primary: #5a5a5a;
+
+	--transition-speed: 0.5s;
+}
+
+.row-color {
+	background: rgb(241, 241, 241);
+}
+.row-color:nth-of-type(even) {
+	background: rgb(226, 226, 226);
+}
+.row-color:hover {
+	background: rgb(195, 194, 194);
+	cursor: pointer;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+	max-width: 400px;
+	min-width: 150px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 20px;
+}
+div.loader {
+	font-size: 100px;
+}
+
+.loaded {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+*:focus {
+	outline: none !important;
+}
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}

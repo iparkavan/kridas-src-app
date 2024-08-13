@@ -1,0 +1,84 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  beats-bulk-eligibility-sqs-trigger-lambda
+
+  SAM Template for beats-bulk-eligibility-sqs-trigger lambda
+
+
+Resources:
+  TaskQueue: 
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: "beats-bulk-eligibility-input-sqs"
+      DelaySeconds: 0
+      VisibilityTimeout: 120
+  LambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Description: "A Lambda function that triggers to send avalitity API"
+      Code: eligibility/
+      Handler: "index.handler"
+      Runtime: "nodejs14.x"
+      Timeout: "30"
+      Environment:
+        Variables:
+            region: '{{resolve:ssm:region:1}}' 
+            DefaultPass: '{{resolve:ssm:DefaultPass:1}}'
+            RDS_HOSTNAME: '{{resolve:ssm:RDS_HOSTNAME:1}}'
+            RDS_USERNAME: '{{resolve:ssm:RDS_USERNAME:1}}'
+            RDS_PASSWORD: '{{resolve:ssm:RDS_PASSWORD:1}}'
+            RDS_PORT: '{{resolve:ssm:RDS_PORT:1}}'
+            RDS_DATABASE: '{{resolve:ssm:RDS_DATABASE:1}}'
+            AVAILITY_CLIENT_ID: '{{resolve:ssm:AVAILITY_CLIENT_ID:1}}'
+            AVAILITY_CLIENT_SECRET: '{{resolve:ssm:AVAILITY_CLIENT_SECRET:1}}'
+            AVAILITY_SUBMITTER_LAST_NAME: '{{resolve:ssm:AVAILITY_SUBMITTER_LAST_NAME:1}}'
+            AVAILITY_SUBMITTER_ID: '{{resolve:ssm:AVAILITY_SUBMITTER_ID:1}}'
+            AVAILITY_COVERAGES_API: '{{resolve:ssm:AVAILITY_COVERAGES_API:1}}'
+            AVAILITY_TOKEN_URL: '{{resolve:ssm:AVAILITY_TOKEN_URL:1}}'
+            accessKeyId: '{{resolve:ssm:accessKeyId:1}}'
+            secretAccessKey: '{{resolve:ssm:secretAccessKey:1}}'
+      Role: !GetAtt LambdaRole.Arn
+     
+      
+  LambdaRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: "Allow"
+          Principal:
+            Service:
+            - "lambda.amazonaws.com"
+          Action:
+          - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+      - PolicyName: "beats-bulk-eligibility-input-sqs-trigger"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+              - logs:*
+              Resource: "*"
+      - PolicyName: allowSqs
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+              - sqs:ReceiveMessage
+              - sqs:DeleteMessage
+              - sqs:GetQueueAttributes
+              - sqs:ChangeMessageVisibility
+              Resource: !GetAtt TaskQueue.Arn
+
+  LambdaFunctionEventSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 1
+      Enabled: true
+      EventSourceArn: !GetAtt TaskQueue.Arn
+      FunctionName: !GetAtt LambdaFunction.Arn

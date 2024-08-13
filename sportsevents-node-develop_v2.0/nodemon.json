@@ -1,0 +1,7 @@
+{
+  "env": {
+    "DB_NAME": "sp-dev",
+    "DB_USER": "postgres",
+    "DB_PASSWORD": "password"
+  }
+}

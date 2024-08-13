@@ -1,0 +1,23 @@
+version = 0.1
+[beatsbulkdev]
+[beatsbulkdev.deploy]
+[beatsbulkdev.deploy.parameters]
+stack_name = "beats-bulk-group-payer-validation"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-s5cow39u6bsa"
+s3_prefix = "beats-bulk-group-payer-validation"
+region = "us-east-2"
+profile = "beatsbulkdev"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+disable_rollback = true
+
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "beats-bulk-validation"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-s5cow39u6bsa"
+s3_prefix = "beats-bulk-validation"
+region = "us-east-2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []

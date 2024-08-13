@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply text-gray;
+  }
+
+  @font-face {
+    font-family: 'Suisse';
+    font-weight: 400;
+    src: url(/fonts/suisseintl-regular.otf);
+  }
+  @font-face {
+    font-family: 'Suisse';
+    font-weight: 500;
+    src: url(/fonts/suisseintl-medium.ttf);
+  }
+  @font-face {
+    font-family: 'Suisse';
+    font-weight: 300;
+    font-style: italic;
+    src: url(/fonts/suisseintl-light-italic.otf);
+  }
+  @font-face {
+    font-family: 'Suisse';
+    font-weight: 600;
+    font-style: italic;
+    src: url(/fonts/suisseintl-semibold-italic.otf);
+  }
+  @font-face {
+    font-family: 'Suisse';
+    font-weight: 700;
+    src: url(/fonts/suisseintl-bold.otf);
+  }
+}

@@ -1,0 +1,139 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.login_wrap {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  min-width: 100vh;
+}
+
+.login_left {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.login_right {
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+}
+
+.inputError {
+  border-color: red;
+}
+
+.form_block {
+  min-width: 400px;
+}
+
+.login_flex_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 70px 70px 20px 60px 80px;
+      grid-template-rows: 1fr 70px 70px 20px 60px 80px;
+  border: 1px solid #f2f2f2;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.25);
+}
+
+.left_img {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.login_caps {
+  text-align: center;
+}
+
+.fgt_pass {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 12px;
+  color: grey;
+}
+
+.styl--center {
+  text-align: center;
+}
+
+.login_signup {
+  font-size: 14px;
+  color: grey;
+  text-align: center;
+}
+
+.login_links {
+  color: blue;
+  font-weight: 500;
+}
+
+.academy__name {
+  padding: 0px 50px;
+  width: 400px;
+  height: auto;
+}
+
+.forgot_pass_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 70px 70px 70px 60px;
+      grid-template-rows: 1fr 70px 70px 70px 60px;
+  border: 1px solid #f2f2f2;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.25);
+}
+
+.fdbck-msg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.forgot_pass_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 70px 70px 70px 70px;
+      grid-template-rows: 1fr 70px 70px 70px 70px;
+  border: 1px solid #f2f2f2;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.25);
+}
+/*# sourceMappingURL=auth.css.map */

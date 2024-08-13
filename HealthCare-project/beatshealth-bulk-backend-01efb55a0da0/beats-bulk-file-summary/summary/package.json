@@ -1,0 +1,26 @@
+{
+    "name": "beats-bulk-file-summary",
+    "version": "1.0.0",
+    "description": "beats-bulk-file-summary",
+    "main": "app.js",
+    "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
+    "author": "SAM CLI",
+    "license": "MIT",
+    "dependencies": {
+      "amazon-cognito-identity-js": "^5.0.3",
+      "aws-sdk": "^2.929.0",
+      "axios": "^0.21.1",
+      "bluebird": "^3.7.2",
+      "mysql": "2.12.0",
+      "json2csv":"5.0.7",
+      "xlsx": "0.18.5"
+    },
+    "scripts": {
+      "test": "mocha tests/unit/"
+    },
+    "devDependencies": {
+      "chai": "^4.2.0",
+      "mocha": "^8.2.1"
+    }
+  }
+  

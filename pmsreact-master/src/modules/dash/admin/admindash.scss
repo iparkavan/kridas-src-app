@@ -1,0 +1,247 @@
+.db-admin-wrap {
+	display: grid;
+
+	background-color: #ffffff;
+	height: 100vh;
+}
+
+@import "react-big-calendar/lib/sass/styles";
+@import "react-big-calendar/lib/addons/dragAndDrop/styles";
+@import "react-phone-number-input/style";
+
+.db-admin-wrap {
+	display: grid;
+
+	background-color: #ffffff;
+	height: 100vh;
+}
+
+.db-admin-wrap {
+	display: grid;
+
+	background-color: #ffffff;
+	height: 100vh;
+}
+
+.App {
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 40px;
+	// calendar date styleing (02, 03)
+	.rbc-month-row {
+		font-size: 20px !important;
+		color: #727272;
+	}
+}
+
+.App-logo {
+	animation: App-logo-spin infinite 20s linear;
+	height: 80px;
+}
+
+.App-header {
+	background-color: #222;
+	height: 150px;
+	padding: 20px;
+	color: white;
+}
+
+.App-title {
+	font-size: 1.5em;
+}
+
+.App-intro {
+	font-size: large;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.foobares {
+	font-size: 13px;
+	padding: 2px;
+	width: 94%;
+	margin: 0 auto;
+}
+
+.rbc-btn-group > button {
+	font-size: 14px !important;
+	letter-spacing: 0.5px !important;
+}
+
+.rbc-btn-group {
+	display: flex;
+}
+
+.rbc-btn-group button:nth-child(1) {
+	order: 2;
+}
+
+.rbc-btn-group button:nth-child(2) {
+	order: 1;
+}
+
+.rbc-btn-group button:nth-child(3) {
+	order: 3;
+}
+
+.ad-admin {
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	grid-gap: 10px;
+	// width: 80%;
+	// margin: 0 auto;
+	// margin-top: 10px;
+	// margin-bottom: 10px;
+}
+
+.section-1 {
+	display: grid;
+	// grid-column: 1/-1;
+	grid-template-columns: 1fr 1fr 1fr;
+	border: 0px solid red;
+	grid-gap: 5px;
+}
+.section-2 {
+	display: grid;
+	// grid-column: 1/-1;
+	// grid-template-columns: 1fr 1fr 1fr 1.3fr;
+	border: 0px solid red;
+	//grid-gap: 5px;
+
+	// background-color: #f1f3f6;
+
+	// justify-items: center;
+	// height: 100px;
+	// padding: 5px;
+	// border-radius: 10px;
+}
+
+.PhoneInputInput {
+	flex: 1 1;
+	min-width: 0;
+	padding: 10px !important	;
+}
+
+.rbc-toolbar-label {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.rbc-active {
+	background-color: #666666 !important;
+	color: #ffffff !important;
+	font-size: 14px !important;
+	letter-spacing: 0.5px !important;
+}
+
+.rbc-header {
+	font-size: 16px !important;
+	font-weight: 300 !important;
+	letter-spacing: 0.5px !important;
+}
+
+.rbc-row-segment {
+	padding: 0 1px 4px 1px !important;
+}
+
+.rbc-today {
+	background-color: rgba(255, 255, 255, 0.22) !important;
+
+	border-left: 3px solid royalblue !important;
+}
+
+// .rbc-btn-group > button:last-child:not(:first-child) {
+// 	border-top-left-radius: 16px;
+// 	border-bottom-left-radius: 16px;
+// }
+// .rbc-btn-group > button:first-child:not(:last-child) {
+// 	border-top-right-radius: 16px;
+// 	border-bottom-right-radius: 16px;
+// }
+
+.daycalendar {
+	.rbc-toolbar {
+		flex-direction: row-reverse;
+	}
+	.rbc-event {
+		height: 40px !important;
+	}
+
+	.rbc-toolbar-label {
+		font-size: 18px !important;
+		font-weight: 500 !important;
+	}
+
+	.foobares {
+		font-size: 13px !important;
+		margin: 0px !important;
+		width: 100%;
+	}
+	.rbc-today {
+		// border-bottom: 3px solid royalblue;
+	}
+
+	// day view - current time highlighter
+	.rbc-current-time-indicator {
+		height: 3px !important;
+	}
+}
+
+.element {
+	display: flex;
+	height: 60px;
+	width: 60px;
+	color: crimson;
+	font-size: 20px;
+	font-weight: 400;
+
+	align-items: center;
+
+	justify-content: center;
+
+	border-radius: 16px;
+	box-shadow: inset 0 0 15px rgba(55, 84, 170, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(55, 84, 170, 0.15),
+		-7px -7px 20px rgba(255, 255, 255, 1), inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+}
+
+.element-2 {
+	box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+// .rbc-btn-group:nth-child(3) > button:last-child:not(:first-child) {
+// 	border-top-left-radius: 16px;
+// 	border-bottom-left-radius: 16px;
+// }
+
+// .rbc-btn-group:nth-child(3) > button:first-child:not(:last-child) {
+// 	border-top-right-radius: 16px;
+// 	border-bottom-right-radius: 16px;
+// }
+
+.rbc-toolbar button {
+	transition: 800ms;
+}
+
+.rbc-date-cell.rbc-current a {
+	font-size: 16px;
+	background-color: blue;
+	opacity: 0.5;
+	color: #ffffff;
+	padding: 2px;
+}
+
+.rbc-calendar {
+	font-family: sans-serif;
+	font-size: 12px;
+}
+
+// .rbc-row-segment {
+// 	max-width: 180px !important;
+// }

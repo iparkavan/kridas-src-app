@@ -1,0 +1,271 @@
+{
+    "links": {
+        "self": {
+            "href": "https://api.availity.com/availity/v1/claim-statuses/-3768558764528256405"
+        }
+    },
+    "id": "-3768558764528256405",
+    "customerId": "1052120",
+    "controlNumber": "42465976658",
+    "status": "Complete",
+    "statusCode": "4",
+    "createdDate": "2022-03-30T16:52:34.000+0000",
+    "updatedDate": "2022-03-30T16:52:34.000+0000",
+    "expirationDate": "2022-03-31T15:52:34.000+0000",
+    "fromDate": "2021-07-19T04:00:00.000+0000",
+    "toDate": "2021-07-19T04:00:00.000+0000",
+    "payer": {
+        "id": "87726",
+        "name": "UNITEDHEALTHCARE"
+    },
+    "submitter": {
+        "lastName": "BEATS",
+        "id": "1487751335"
+    },
+    "availityTransactionId": "72414536121648659154599300122210",
+    "providers": [
+        {
+            "lastName": "LEE",
+            "npi": "1215245014"
+        }
+    ],
+    "subscriber": {
+        "firstName": "MARY",
+        "lastName": "EDGMON",
+        "memberId": "931327537"
+    },
+    "patient": {
+        "firstName": "MARY",
+        "lastName": "EDGMON",
+        "birthDate": "1933-04-19",
+        "accountNumber": "CB000DZ85C017",
+        "subscriberRelationship": "Self",
+        "subscriberRelationshipCode": "18"
+    },
+    "claimStatuses": [
+        {
+            "traceId": "42465976658",
+            "claimControlNumber": "10508126",
+            "patientControlNumber": "CB000DZ85C017",
+            "fromDate": "2021-07-19",
+            "toDate": "2021-07-19",
+            "statusDetails": [
+                {
+                    "category": "Finalized/Revised-Adjudication information has been changed",
+                    "categoryCode": "F3",
+                    "status": "The claim/ encounter has completed the adjudication cycle and the entire claim has been voided",
+                    "statusCode": "686",
+                    "effectiveDate": "2021-07-24",
+                    "claimAmount": "2104.14",
+                    "claimAmountUnits": "USD",
+                    "paymentAmount": "0",
+                    "paymentAmountUnits": "USD",
+                    "finalizedDate": "2021-07-24"
+                }
+            ],
+            "serviceLines": [
+                {
+                    "procedureQualifier": "Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes",
+                    "procedureQualifierCode": "HC",
+                    "procedureCode": "J0178",
+                    "chargeAmount": "1890.06",
+                    "chargeAmountUnits": "USD",
+                    "paymentAmount": "0",
+                    "paymentAmountUnits": "USD",
+                    "quantity": "1",
+                    "controlNumber": "9631539",
+                    "fromDate": "2021-07-19",
+                    "toDate": "2021-07-19",
+                    "statusDetails": [
+                        {
+                            "category": "Finalized/Denial-The claim/line has been denied.",
+                            "categoryCode": "F2",
+                            "status": "Missing or invalid information",
+                            "statusCode": "21",
+                            "effectiveDate": "2021-07-24"
+                        },
+                        {
+                            "category": "Finalized/Denial-The claim/line has been denied.",
+                            "categoryCode": "F2",
+                            "status": "Diagnosis code",
+                            "statusCode": "255",
+                            "effectiveDate": "2021-07-24"
+                        }
+                    ]
+                },
+                {
+                    "procedureQualifier": "Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes",
+                    "procedureQualifierCode": "HC",
+                    "procedureCode": "67028",
+                    "modifier1": "Left side",
+                    "modifier1Code": "LT",
+                    "chargeAmount": "214.08",
+                    "chargeAmountUnits": "USD",
+                    "paymentAmount": "0",
+                    "paymentAmountUnits": "USD",
+                    "quantity": "1",
+                    "controlNumber": "9610101",
+                    "fromDate": "2021-07-19",
+                    "toDate": "2021-07-19",
+                    "statusDetails": [
+                        {
+                            "category": "Finalized/Denial-The claim/line has been denied.",
+                            "categoryCode": "F2",
+                            "status": "Missing or invalid information",
+                            "statusCode": "21",
+                            "effectiveDate": "2021-07-24"
+                        },
+                        {
+                            "category": "Finalized/Denial-The claim/line has been denied.",
+                            "categoryCode": "F2",
+                            "status": "Diagnosis code",
+                            "statusCode": "255",
+                            "effectiveDate": "2021-07-24"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "traceId": "42465976658",
+            "claimControlNumber": "12392190",
+            "patientControlNumber": "CB000DZ85C017",
+            "fromDate": "2021-07-19",
+            "toDate": "2021-07-19",
+            "statusDetails": [
+                {
+                    "category": "Finalized/Denial-The claim/line has been denied.",
+                    "categoryCode": "F2",
+                    "status": "Denied Charge or Non-covered Charge",
+                    "statusCode": "585",
+                    "effectiveDate": "2021-09-03",
+                    "claimAmount": "3879.72",
+                    "claimAmountUnits": "USD",
+                    "paymentAmount": "0",
+                    "paymentAmountUnits": "USD",
+                    "finalizedDate": "2021-08-16",
+                    "remittanceDate": "2021-09-03",
+                    "checkNumber": "L0893716"
+                }
+            ],
+            "serviceLines": [
+                {
+                    "procedureQualifier": "Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes",
+                    "procedureQualifierCode": "HC",
+                    "procedureCode": "67028",
+                    "modifier1": "Left side",
+                    "modifier1Code": "LT",
+                    "chargeAmount": "214.08",
+                    "chargeAmountUnits": "USD",
+                    "paymentAmount": "0",
+                    "paymentAmountUnits": "USD",
+                    "quantity": "1",
+                    "controlNumber": "9610101",
+                    "fromDate": "2021-07-19",
+                    "toDate": "2021-07-19",
+                    "statusDetails": [
+                        {
+                            "category": "Finalized/Denial-The claim/line has been denied.",
+                            "categoryCode": "F2",
+                            "status": "Duplicate of a previously processed claim/line",
+                            "statusCode": "54",
+                            "effectiveDate": "2021-09-03"
+                        }
+                    ]
+                },
+                {
+                    "procedureQualifier": "Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes",
+                    "procedureQualifierCode": "HC",
+                    "procedureCode": "J0178",
+                    "chargeAmount": "3665.64",
+                    "chargeAmountUnits": "USD",
+                    "paymentAmount": "0",
+                    "paymentAmountUnits": "USD",
+                    "quantity": "2",
+                    "controlNumber": "9915123",
+                    "fromDate": "2021-07-19",
+                    "toDate": "2021-07-19",
+                    "statusDetails": [
+                        {
+                            "category": "Finalized/Denial-The claim/line has been denied.",
+                            "categoryCode": "F2",
+                            "status": "Duplicate of a previously processed claim/line",
+                            "statusCode": "54",
+                            "effectiveDate": "2021-09-03"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "traceId": "42465976658",
+            "claimControlNumber": "16595681",
+            "patientControlNumber": "CB000DZ85C017",
+            "fromDate": "2021-07-19",
+            "toDate": "2021-07-19",
+            "statusDetails": [
+                {
+                    "category": "Finalized/Payment-The claim/line has been paid.",
+                    "categoryCode": "F1",
+                    "status": "Processed according to plan provisions (Plan refers to provisions that exist between the Health Plan and the Consumer or Patient)",
+                    "statusCode": "104",
+                    "effectiveDate": "2021-09-28",
+                    "claimAmount": "3879.72",
+                    "claimAmountUnits": "USD",
+                    "paymentAmount": "1513.01",
+                    "paymentAmountUnits": "USD",
+                    "finalizedDate": "2021-09-28"
+                }
+            ],
+            "serviceLines": [
+                {
+                    "procedureQualifier": "Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes",
+                    "procedureQualifierCode": "HC",
+                    "procedureCode": "67028",
+                    "modifier1": "Left side",
+                    "modifier1Code": "LT",
+                    "chargeAmount": "214.08",
+                    "chargeAmountUnits": "USD",
+                    "paymentAmount": "42.82",
+                    "paymentAmountUnits": "USD",
+                    "quantity": "1",
+                    "controlNumber": "9610101",
+                    "fromDate": "2021-07-19",
+                    "toDate": "2021-07-19",
+                    "statusDetails": [
+                        {
+                            "category": "Finalized/Payment-The claim/line has been paid.",
+                            "categoryCode": "F1",
+                            "status": "Processed according to plan provisions (Plan refers to provisions that exist between the Health Plan and the Consumer or Patient)",
+                            "statusCode": "104",
+                            "effectiveDate": "2021-09-28"
+                        }
+                    ]
+                },
+                {
+                    "procedureQualifier": "Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes",
+                    "procedureQualifierCode": "HC",
+                    "procedureCode": "J0178",
+                    "chargeAmount": "3665.64",
+                    "chargeAmountUnits": "USD",
+                    "paymentAmount": "1470.19",
+                    "paymentAmountUnits": "USD",
+                    "quantity": "2",
+                    "controlNumber": "9915123",
+                    "fromDate": "2021-07-19",
+                    "toDate": "2021-07-19",
+                    "statusDetails": [
+                        {
+                            "category": "Finalized/Payment-The claim/line has been paid.",
+                            "categoryCode": "F1",
+                            "status": "Processed according to contract provisions (Contract refers to provisions that exist between the Health Plan and a Provider of Health Care Services)",
+                            "statusCode": "107",
+                            "effectiveDate": "2021-09-28"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "claimCount": "3"
+}

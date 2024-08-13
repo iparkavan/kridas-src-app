@@ -1,0 +1,225 @@
+// 1. JSON structure is correct
+
+{
+    "widget_name": "test_widget_claimStatus",
+    "patients": [
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        },
+        {
+            "firstName": "Meenakshi",
+            "lastName": "Lakshman",
+            "dob": "04/09/1982",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN5678TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939365",
+            "clientId": "Beats"
+        },
+        {
+            "firstName": "Sam",
+            "lastName": "Jayabal",
+            "dob": "01/01/1980",
+            "fromDateOfService": "0/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN2345TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "BHealth"
+        },
+        {
+            "firstName": "Benedict",
+            "lastName": "Au",
+            "dob": "03/31/1993",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN14TEST",
+            "payerId": "60054",
+            "serviceType": "33",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "BHealth"
+        }
+    ]
+}
+
+// 2. JSON structure is incorrect - first patient missing clientId field
+
+{
+    "widget_name": "test_widget_claimStatus",
+    "patients": [
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969"
+        },
+        {
+            "firstName": "Meenakshi",
+            "lastName": "Lakshman",
+            "dob": "04/09/1982",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN5678TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939365",
+            "clientId": "Beats"
+        }
+    ]
+}
+
+// 3. JSON structure is incorrect - second patient renderingNPI not 10 characters long
+{
+    "widget_name": "test_widget_claimStatus",
+    "patients": [
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        },
+        {
+            "firstName": "Meenakshi",
+            "lastName": "Lakshman",
+            "dob": "04/09/1982",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN5678TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "16893",
+            "clientId": "Beats"
+        }
+    ]
+}
+
+// 4. Duplicate patient records
+
+{
+    "widget_name": "test_widget_claimStatus",
+    "patients": [
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        },
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        },
+    ]
+}
+
+// 5. Second patient invalid service type 
+{
+    "widget_name": "test_widget_claimStatus",
+    "patients": [
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": "60054",
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        },
+        {
+            "firstName": "Meenakshi",
+            "lastName": "Lakshman",
+            "dob": "04/09/1982",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN5678TEST",
+            "payerId": "60054",
+            "serviceType": "SOME_INVALID_SERVICE_TYPE",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        }
+    ]
+}
+
+// 6. Second patient invalid data type - require all strings
+{
+    "widget_name": "test_widget_claimStatus",
+    "patients": [
+        {
+            "firstName": "Suresh",
+            "lastName": "Sekar",
+            "dob": "06/06/1978",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN1234TEST",
+            "payerId": 60054,
+            "serviceType": 30,
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        },
+        {
+            "firstName": "Meenakshi",
+            "lastName": "Lakshman",
+            "dob": "04/09/1982",
+            "fromDateOfService": "05/01/2022",
+            "toDateOfService": "05/30/2022",
+            "mrn": "MRN5678TEST",
+            "payerId": 60054,
+            "serviceType": "30",
+            "memberId": "W121560721",
+            "renderingNPI": "1689939969",
+            "clientId": "Beats"
+        }
+    ]
+}

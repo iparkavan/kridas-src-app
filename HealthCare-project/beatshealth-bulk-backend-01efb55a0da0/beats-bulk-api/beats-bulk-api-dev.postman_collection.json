@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "eb0473f8-7521-4d62-b97b-6497f856c4f7",
+		"name": "beats-bulk-api-dev",
+		"description": "This is the API of Beats Health Smart Platform.\n\nAll values ought to be of `string` type.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signIn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"token\", JSON.parse(responseBody).authorizationToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"suresh@thebeatshealth.com\",\n    \"password\": \"Beats@2022\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/SignIn",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"SignIn"
+					]
+				},
+				"description": "Step 1: Username and password authentication. In the body submit the username and password in a JSON message."
+			},
+			"response": []
+		},
+		{
+			"name": "updateGroupNameMapping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mapping\": [\n        {\n            \"clientId\": \"OM112\",\n            \"clientName\": \"ATI\",\n            \"groupName\": \"ATI Physical\",\n            \"renderingNPI\": \"1234567890\",\n            \"billingNPI\": \"1234123412\"\n        },\n        {\n            \"clientId\": \"OM113\",\n            \"clientName\": \"ATI2\",\n            \"groupName\": \"ATI Physical Therapy LLC\",\n            \"renderingNPI\": \"5678999999\",\n            \"billingNPI\": \"1234123412\"\n        },\n        {\n            \"clientId\": \"OM113\",\n            \"clientName\": \"ATI3\",\n            \"groupName\": \"ATI Physical\",\n            \"renderingNPI\": \"8493933395\",\n            \"billingNPI\": \"1234123412\"\n        },\n        {\n            \"clientId\": \"OM114\",\n            \"clientName\": \"ATI4\",\n            \"groupName\": \"NORTHWESTERN LLC\",\n            \"renderingNPI\": \"8383939024\",\n            \"billingNPI\": \"1234123456\"\n        },\n        {\n            \"clientId\": \"OM114\",\n            \"clientName\": \"ATI4\",\n            \"groupName\": \"NORTHWESTERN MEDICINE\",\n            \"renderingNPI\": \"1234567893\",\n            \"billingNPI\": \"1234123456\"\n        },\n        {\n            \"clientId\": \"OM114\",\n            \"clientName\": \"ATI4\",\n            \"groupName\": \"NORTHWESTERN MEDICINE\",\n            \"renderingNPI\": \"9890909003\",\n            \"billingNPI\": \"1234123412\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/updateGroupNameMapping",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"updateGroupNameMapping"
+					]
+				},
+				"description": "\\[Admin\\] Update group name mapping sheet.\n\nInclude Authorization in the Headers, and transactionId and patient_id in url.\n\nInclude Authorization in the Headers.  \nInclude mapping in the Body.  \nmapping is a list of client, group, and NPI information, each as an dict with the following ordered fields in type string:\n\n*   \"clientId\"\n*   \"clientName\"\n*   \"groupName\"\n*   \"renderingNPI\"\n*   \"billingNPI\"\n    \n\nIf success: returns status code 200 and \"Validation in progress. Check UI shortly. \"\n\nIf fail: returns status code 400 and '\"Error. Contact system administrator. \""
+			},
+			"response": []
+		},
+		{
+			"name": "checkClaimStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"  pm.environment.set(\"transactionId_claim\", JSON.parse(responseBody).transactionId);",
+							"} catch (error) {",
+							"  console.error(\"Invalid request.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"widget_name\": \"test_widget_claimStatus\",\n    \"patients\": [\n        {\n            \"firstName\": \"Suresh\",\n            \"lastName\": \"Sekar\",\n            \"dob\": \"06/06/1978\",\n            \"fromDateOfService\": \"05/01/2022\",\n            \"toDateOfService\": \"05/30/2022\",\n            \"mrn\": \"MRN1234TEST\",\n            \"payerId\": \"60054\",\n            \"serviceType\": \"30\",\n            \"memberId\": \"W121560721\",\n            \"renderingNPI\": \"1689939969\",\n            \"clientId\": \"Beats\"\n        },\n        {\n            \"firstName\": \"Meenakshi\",\n            \"lastName\": \"Lakshman\",\n            \"dob\": \"04/09/1982\",\n            \"fromDateOfService\": \"05/01/2022\",\n            \"toDateOfService\": \"05/30/2022\",\n            \"mrn\": \"MRN5678TEST\",\n            \"payerId\": \"60054\",\n            \"serviceType\": \"30\",\n            \"memberId\": \"W121560721\",\n            \"renderingNPI\": \"1689939969\",\n            \"clientId\": \"Beats\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/benefits/checkClaimStatus",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkClaimStatus"
+					]
+				},
+				"description": "Step 2: Submit patient data for checkClaimStatus.\n\nInclude Authorization in the Headers.  \nInclude widget_name (type string) and patients (type array) in the Body.  \npatients is a list of patient information, each as an dict with the following ordered fields in type string:\n\n*   \"firstName\"\n*   \"lastName\"\n*   \"dob\"\n*   \"fromDateOfService\"\n*   \"toDateOfService\"\n*   \"mrn\"\n*   \"payerId\"\n*   \"serviceType\"\n*   \"memberId\"\n*   \"renderingNPI\"\n*   ~~\"billingNPI\"~~\n*   \"clientId\""
+			},
+			"response": []
+		},
+		{
+			"name": "checkClaimStatusTransactionSummary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"  const patient_id = JSON.parse(responseBody).patients[0].patientId;",
+							"  pm.environment.set(\"patientId_claim\", patient_id);",
+							"  console.log(\"patient id:\", patient_id);",
+							"} catch (error) {",
+							"  pm.environment.set(\"patientId_claim\", \"UNDEFINED\");",
+							"  console.error(\"Awaiting patientId information. Retry before proceeding.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/benefits/checkClaimStatus/{{transactionId_claim}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkClaimStatus",
+						"{{transactionId_claim}}"
+					]
+				},
+				"description": "Step 3: Query previous transaction for checkClaimStatus.\n\nInclude Authorization in the Headers, and transactionId in url.\n\nIf success: returns status code 200 and \"status\" as \"Completed/Failed\", along with \"transactionId\", \"url', \"summary\", and \"patients\".\n\nEach 'patient' object contains \"patientId\", \"firstName\", \"lastName\", \"dob\", \"mrn\", \"status\" and \"url\".\n\nIf still processing: returns status code 200 and \"status\" as \"Processing\", along with \"transactionId\", \"url', trivial \"summary\", and empty \"patients\".\n\nIf fail: returns status code 400 and '\"Error. Contact system administrator. \""
+			},
+			"response": []
+		},
+		{
+			"name": "checkClaimStatusTransactionDetailed - 1st patient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/benefits/checkClaimStatus/{{transactionId_claim}}/{{patientId_claim}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkClaimStatus",
+						"{{transactionId_claim}}",
+						"{{patientId_claim}}"
+					]
+				},
+				"description": "Step 4: Query patient/ level information for a previous transaction for checkClaimStatus.\n\nInclude Authorization in the Headers, and transactionId and patient_id in url."
+			},
+			"response": []
+		},
+		{
+			"name": "checkClaimStatusTransactionDetailed - all patients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/benefits/checkClaimStatus/{{transactionId_claim}}/all",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkClaimStatus",
+						"{{transactionId_claim}}",
+						"all"
+					]
+				},
+				"description": "Step 4: Query patient/ level information for a previous transaction for checkClaimStatus.\n\nInclude Authorization in the Headers, and transactionId and patient_id in url."
+			},
+			"response": []
+		},
+		{
+			"name": "checkEligibility",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"  pm.environment.set(\"transactionId_eligibility\", JSON.parse(responseBody).transactionId);",
+							"} catch (error) {",
+							"  console.error(\"Invalid request.\");  ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"widget_name\": \"test_widget_eligibility\",\n    \"patients\": [\n        {\n            \"firstName\": \"Suresh\",\n            \"lastName\": \"Sekar\",\n            \"dob\": \"06/06/1978\",\n            \"fromDateOfService\": \"05/01/2022\",\n            \"toDateOfService\": \"05/30/2022\",\n            \"mrn\": \"MRN1234TEST\",\n            \"payerId\": \"60054\",\n            \"serviceType\": \"30\",\n            \"memberId\": \"W121560721\",\n            \"renderingNPI\": \"1689939969\",\n            \"clientId\": \"Beats\"\n        },\n        {\n            \"firstName\": \"Meenakshi\",\n            \"lastName\": \"Lakshman\",\n            \"dob\": \"04/09/1982\",\n            \"fromDateOfService\": \"05/01/2022\",\n            \"toDateOfService\": \"05/30/2022\",\n            \"mrn\": \"MRN5678TEST\",\n            \"payerId\": \"60054\",\n            \"serviceType\": \"30\",\n            \"memberId\": \"W121560721\",\n            \"renderingNPI\": \"1689939365\",\n            \"clientId\": \"Beats\"\n        },\n        {\n            \"firstName\": \"Sam\",\n            \"lastName\": \"Jayabal\",\n            \"dob\": \"01/01/1980\",\n            \"fromDateOfService\": \"0/01/2022\",\n            \"toDateOfService\": \"05/30/2022\",\n            \"mrn\": \"MRN2345TEST\",\n            \"payerId\": \"60054\",\n            \"serviceType\": \"30\",\n            \"memberId\": \"W121560721\",\n            \"renderingNPI\": \"1689939969\",\n            \"clientId\": \"BHealth\"\n        },\n        {\n            \"firstName\": \"Benedict\",\n            \"lastName\": \"Au\",\n            \"dob\": \"03/31/1993\",\n            \"fromDateOfService\": \"05/01/2022\",\n            \"toDateOfService\": \"05/30/2022\",\n            \"mrn\": \"MRN14TEST\",\n            \"payerId\": \"60054\",\n            \"serviceType\": \"33\",\n            \"memberId\": \"W121560721\",\n            \"renderingNPI\": \"1689939969\",\n            \"clientId\": \"BHealth\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/benefits/checkEligibility",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkEligibility"
+					]
+				},
+				"description": "Step 2: Submit patient data for checkClaimStatus.\n\nInclude Authorization in the Headers.  \nInclude widget_name (type string) and patients (type array) in the Body.  \npatients is a list of patient information, each as an dict with the following ordered fields in type string:\n\n*   \"firstName\"\n*   \"lastName\"\n*   \"dob\"\n*   \"fromDateOfService\"\n*   \"toDateOfService\"\n*   \"mrn\"\n*   \"payerId\"\n*   \"serviceType\"\n*   \"memberId\"\n*   \"renderingNPI\"\n*   ~~\"billingNPI\"~~\n*   \"clientId\"\n    \n\nIf success: returns status code 200 and status 'Processing', along with \"transactionId\", 'url', \"patientCount\" and \"timeSubmitted\"\n\nIf fail: returns status code 400 and '\"Error. Contact system administrator. \""
+			},
+			"response": []
+		},
+		{
+			"name": "checkEligibilityTransactionSummary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"  const patient_id = JSON.parse(responseBody).patients[0].patientId;",
+							"  pm.environment.set(\"patientId_eligibility\", patient_id);",
+							"  console.log(\"patient id:\", patient_id);",
+							"} catch (error) {",
+							"  pm.environment.set(\"patientId_eligibility\", \"UNDEFINED\");",
+							"  console.error(\"Awaiting patientId information. Retry before proceeding.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/benefits/checkEligibility/{{transactionId_eligibility}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkEligibility",
+						"{{transactionId_eligibility}}"
+					]
+				},
+				"description": "Step 3: Query previous transaction for checkEligibility.\n\nInclude Authorization in the Headers, and transactionId in url.\n\nIf success: returns status code 200 and \"status\" as \"Completed/Failed\", along with \"transactionId\", \"url', \"summary\", and \"patients\".\n\nEach 'patient' object contains \"patientId\", \"firstName\", \"lastName\", \"dob\", \"mrn\", \"status\" and \"url\".\n\nIf still processing: returns status code 200 and \"status\" as \"Processing\", along with \"transactionId\", \"url', trivial \"summary\", and empty \"patients\".\n\nIf fail: returns status code 400 and '\"Error. Contact system administrator. \""
+			},
+			"response": []
+		},
+		{
+			"name": "checkEligibilityTransactionDetailed - 1st patient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/benefits/checkEligibility/{{transactionId_eligibility}}/{{patientId_eligibility}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkEligibility",
+						"{{transactionId_eligibility}}",
+						"{{patientId_eligibility}}"
+					]
+				},
+				"description": "Step 4: Query patient/ level information for a previous transaction for checkEligibility.\n\nInclude Authorization in the Headers, and transactionId and patient_id in url."
+			},
+			"response": []
+		},
+		{
+			"name": "checkEligibilityTransactionDetailed - all patients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/benefits/checkEligibility/{{transactionId_eligibility}}/all",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"benefits",
+						"checkEligibility",
+						"{{transactionId_eligibility}}",
+						"all"
+					]
+				},
+				"description": "Step 4: Query patient/ level information for a previous transaction for checkEligibility.\n\nInclude Authorization in the Headers, and transactionId and patient_id in url."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://9vtproy7mc.execute-api.us-east-2.amazonaws.com/dev",
+			"type": "string"
+		}
+	]
+}
